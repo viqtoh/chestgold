@@ -75,6 +75,11 @@ TEMPLATES = [
 WSGI_APPLICATION = "chestgold.wsgi.application"
 
 
+CSRF_TRUSTED_ORIGINS = ['https://inventory2.apps.ginnsltd.com',]
+
+CORS_ALLOWED_ORIGINS = ['https://inventory2.apps.ginnsltd.com',]
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
