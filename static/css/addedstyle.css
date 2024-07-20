@@ -1,0 +1,50 @@
+@media screen and (max-width: 600px) {
+	.investor-section {
+		margin-top: -100px;
+		margin-bottom: -50px;
+	}
+	.investor-section  img {
+		width: 50%;
+		margin-left: 25%;
+	}
+
+	.investor-section .vh-team__overlay {
+		width: 50%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.transection-section center h2 {
+		width: 10%;
+	}
+}
+
+/* Add this CSS to style the toggle menu icon */
+.vh-toggle-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.vh-toggle-menu__icon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  margin-bottom: 5px;
+}
+
+/* Add this CSS to hide the menu by default on smaller screens */
+@media (max-width: 600px) {
+  #menuList {
+    display: none;
+  }
+}
+
+
+
+
