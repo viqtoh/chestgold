@@ -1,0 +1,75 @@
+{% load static %}
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crestmetals</title>
+<link href="{% static 'assets/img/favicon.png' %}" rel="icon" sizes="16x16" type="image/png"/>
+<link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+</head>
+<body class="t-bg-secondary">
+<div class="alert alert-success" role="alert" style="padding: 0px; text-align: center;">
+</div>
+<div class="t-pt-100 t-pb-100 animate-section animate-section--feature">
+<div class="container">
+<div class="row g-3">
+<div class="col-12">
+<div class="vh-auth">
+<div class="row g-4">
+<div class="col-lg-5" style="margin: auto;">
+<center>
+<a href="...html" style="text-decoration-line: none">
+<h3 class="vh-query__title t-text-white text-capitalize mb-3">
+                    Sign in
+                      </h3>
+</a>
+</center>
+<form class="row g-4" method="POST">
+  <input type="hidden" name="next" value="{{ next }}">
+  {% csrf_token %}
+<div class="col-12">
+  {% if error %}
+            <p style="color: red; height: 10px; margin-top: 10px;">{{ error }}</p>
+        {% endif %}
+<input class="form-control form-control-custom form-control-custom--outline form-control-custom--outline-thin t-text-white" name="email" value="{{ email }}" placeholder="email" required="" type="email"/>
+</div>
+<div class="col-12">
+<input class="form-control form-control-custom form-control-custom--outline form-control-custom--outline-thin t-text-white" minlength="8" name="password" placeholder="Password" required="" type="password"/>
+<p><small><a href="reset-password.html">Forgot password?</a></small></p>
+</div>
+<div class="col-12">
+<button class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-100" name="login" type="submit">
+                        Sign in
+                      </button>
+</div>
+<div class="col-12">
+<p class="mb-0 t-text-white text-capitalize">
+                        Don't have an account?
+                        <a class="t-link t-link--primary t-primary-clr text-capitalize d-inline-block" href="#">
+                          Sign up
+                        </a>
+</p>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="back-to-top">
+<span class="back-top">
+<i class="bx bxs-chevron-up"></i>
+</span>
+</div>
+<script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script><script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'js/slick.js' %}"></script>
+<script src="{% static 'js/odometer.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
