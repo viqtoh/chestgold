@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Transactions{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="row vh-user-panel t-bg-alpha">
+        <div class="list--row__item d-lg-inline-block my-2 col-lg-7 col-sm-12">
+          <a href="{% url 'dashboard' %}" style="text-decoration-line:none;"><p class="t-text-white text-capitalize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+              <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"></path>
+            </svg>
+            History
+          </p></a>
+          <h4 class="vh-user-panel__title t-text-white text-capitalize">
+            Transactions
+          </h4>
+          <p class="t-text-white text-capitalize">
+            <small>List of transactions in your account.</small>
+          </p>
+        </div>
+        <div class="col-lg-4 col-sm-12 pt-5">
+          <a href="plans.php">
+          <button type="submit" class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-100 p-2 fw-bold" style="color: #fff" name="transfer_funds">Invest &amp; Earn
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"></path>
+          </svg>
+          </button>
+          </a>
+        </div>
+    </div>
+    <div class="mt-5">
+      <div class="row g-3 g-xxl-4">
+        <div class="col-lg-7 col-xl-8">
+          <div class="
+              d-flex
+              flex-wrap
+              align-items-center
+              mb-4
+              justify-content-between
+            ">
+            <h3 class="t-text-white text-capitalize">
+              All Transactions
+            </h3>
+          </div>
+
+          <div class="table-responsive vh-table" style="max-height: 80vh;">
+            
+                  }
+                  
+                  }
+                  <table class="table mb-0">
+              <thead>
+                <tr class="vh-table__rounded t-bg-gradient-orange">
+                  <th class="
+                      t-text-white
+                      text-capitalize
+                      lg-text
+                      p-3
+                      t-fw-md
+                    ">
+                    Amount
+                  </th>
+                  <th class="
+                      t-text-white
+                      text-capitalize
+                      lg-text
+                      p-3
+                      t-fw-md
+                    ">
+                    Status
+                  </th>
+                  <th class="
+                      t-text-white
+                      text-capitalize
+                      lg-text
+                      p-3
+                      t-fw-md
+                    ">
+                    Transaction type
+                  </th>
+                  <th class="
+                      t-text-white
+                      text-capitalize
+                      lg-text
+                      p-3
+                      t-fw-md
+                    ">
+                    date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+               
+                <tr>
+                  <td class="t-text-white">$1,000.00</td><td class="t-text-white">Pending</td>
+                  <td class="t-text-white">Deposit</td>
+                  <td class="t-text-white">07/20/2024 05:37:42 am</td>
+                </tr>
+                 
+                <tr>
+                  <td class="t-text-white">$1,000.00</td><td class="t-text-white">Pending</td>
+                  <td class="t-text-white">Deposit</td>
+                  <td class="t-text-white">07/20/2024 05:38:51 am</td>
+                </tr>
+                                      </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock content %}

@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from user.managers import CustomUserManager
 from django.utils import timezone
 from django.conf import settings
+import random, string
 
 
 class User(AbstractUser):
@@ -22,6 +23,7 @@ class User(AbstractUser):
     state = models.CharField(max_length=250, null=True, blank=True)
     postal_code = models.CharField(max_length=250, null=True, blank=True)
     status = models.CharField(max_length=255, default="available")
+    ref = models.CharField(max_length=255, null=True, blank=True)
 
 
     objects = CustomUserManager()
@@ -36,3 +38,20 @@ class User(AbstractUser):
         if self.last_name:
             name += " " + self.last_name
         return name
+    
+    def gen_ref(self, length=10):
+        characters = string.ascii_letters + string.digits
+        uniq=False
+        while not uniq:
+            ref = ''.join(random.choice(characters) for _ in range(length))
+            u = User.objects.filter(ref=ref).first()
+            if(not u):
+                self.ref= ref
+                self.save()
+                uniq=True
+
+    
+    def get_ref(self):
+        if(not self.ref):
+            self.gen_ref()
+        return self.ref

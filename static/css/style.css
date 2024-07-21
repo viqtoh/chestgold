@@ -19697,7 +19697,7 @@ input[type=number] {
 -----------------------------------------*/
 
 .vh-hero {
-    background-image: url(../img/hero-bg.png);
+    background-image: url(../images/hero-bg.png);
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -19763,7 +19763,7 @@ input[type=number] {
 }
 
 .vh-hero-alt {
-    background: url(../img/dot-bg.png) center center no-repeat, #8B00FF;
+    background: url(../images/dot-bg.png) center center no-repeat, #8B00FF;
     background-size: cover;
 }
 
@@ -20365,8 +20365,8 @@ input[type=number] {
 }
 
 .vh-plan-card--masked {
-    -webkit-mask-image: url(../img/plan-shape.png);
-    mask-image: url(../img/plan-shape.png);
+    -webkit-mask-image: url(../images/plan-shape.png);
+    mask-image: url(../images/plan-shape.png);
     -webkit-mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
@@ -20739,8 +20739,8 @@ input[type=number] {
 }
 
 .vh-team__img {
-    -webkit-mask-image: url(../img/team-shape.png);
-    mask-image: url(../img/team-shape.png);
+    -webkit-mask-image: url(../images/team-shape.png);
+    mask-image: url(../images/team-shape.png);
     -webkit-mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
@@ -20791,7 +20791,7 @@ input[type=number] {
 
 @media screen and (min-width: 1200px) {
     .investor-section::after {
-        content: url(../img/investor-bg.png);
+        content: url(../images/investor-bg.png);
         position: absolute;
         top: 55px;
         left: 50%;
@@ -21189,7 +21189,7 @@ input[type=number] {
 -----------------------------------------*/
 
 .faq-section {
-    background-image: url(../img/faq-bg.png);
+    background-image: url(../images/faq-bg.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21209,7 +21209,7 @@ input[type=number] {
 }
 
 .faq-section--secondary {
-    background-image: url(../img/wp-bg.png);
+    background-image: url(../images/wp-bg.png);
 }
 
 .faq-section--secondary::after {
@@ -21328,7 +21328,7 @@ input[type=number] {
 }
 
 .vh-testimonial-slider--bg {
-    background-image: url(../img/feedback-bg.png);
+    background-image: url(../images/feedback-bg.png);
     background-size: contain;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -21341,7 +21341,7 @@ input[type=number] {
 
 @media screen and (min-width: 992px) {
     .testimonial-section {
-        background-image: url(../img/testimonial-bg.png);
+        background-image: url(../images/testimonial-bg.png);
         background-position: right center;
         background-repeat: no-repeat;
         background-size: contain;
@@ -21639,7 +21639,7 @@ input[type=number] {
 
 .vh-footer-primary__container {
     position: relative;
-    background-image: url(../img/footer-bg.png);
+    background-image: url(../images/footer-bg.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -21689,7 +21689,7 @@ input[type=number] {
 
 @media screen and (min-width: 1920px) {
     .vh-footer-primary__body::before {
-        content: url(../img/footer-img-left.png);
+        content: url(../images/footer-img-left.png);
         position: absolute;
         top: 50%;
         left: 0;
@@ -21701,7 +21701,7 @@ input[type=number] {
 
 @media screen and (min-width: 1920px) {
     .vh-footer-primary__body::after {
-        content: url(../img/footer-img-right.png);
+        content: url(../images/footer-img-right.png);
         position: absolute;
         top: 50%;
         right: 0;
@@ -21978,7 +21978,7 @@ input[type=number] {
 
 .profit-section__container {
     position: relative;
-    background-image: url(../img/footer-bg.png);
+    background-image: url(../images/footer-bg.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22143,7 +22143,7 @@ input[type=number] {
 
 @media screen and (min-width: 1200px) {
     .vh-footer-secondary__body {
-        background-image: url(../img/secondary-footer-bg.png);
+        background-image: url(../images/secondary-footer-bg.png);
         background-size: contain;
         background-position: center center;
         background-repeat: no-repeat;

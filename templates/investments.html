@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Investments{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="row vh-user-panel t-bg-alpha">
+        <div class="list--row__item d-lg-inline-block my-2 col-lg-4 col-sm-12">
+          <p class="t-text-white text-capitalize">
+            Investment
+          </p>
+          <h4 class="vh-user-panel__title t-text-white text-capitalize">
+            Invested Plans
+          </h4>
+          <p class="t-text-white text-capitalize">
+            <small>At a glance summary of your investment.</small>
+          </p>
+        </div>
+        <div class="col-lg-7 col-sm-12 pt-5">
+          <div class="row">
+            <div class="col-lg-6">
+                <a href="deposit.php">
+                <button type="submit" class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-100 p-2 fw-bold" style="color: #fff" name="transfer_funds">Deposit Funds
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                  <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"></path>
+                </svg>
+                </button>
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a href="plans.php">
+                <button type="submit" class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-100 p-2 fw-bold" style="color: #fff" name="transfer_funds">Invest &amp; Earn
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                  <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"></path>
+                </svg>
+                </button>
+                </a>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    <div class="mt-5">
+      <div class="row g-3 g-xl-4">
+                           <div class="col-md-6 col-lg-5">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <p class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Investment Account         
+              <svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The available balance in your investment account">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>
+              </p>
+              </div>
+            <h6 class="t-text-white fw-bold text-uppercase">
+              0.00 usd
+            </h6>
+
+            <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
+            <p style="font-size: 16px">
+              Available Funds
+            </p>
+            </div>
+          
+            <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
+              0.00
+            </h3>
+            <p class="fw-bold text-capitalize t-text-white col-lg-10">Locked</p>
+            <div class="col-sm-12 col-lg-10">
+              <button type="button" class="btn btn-block btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                <b>Transfer Funds
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </b>
+              </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Enter amount you would like to send</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="transfer_funds_code.php">
+                        <div class="modal-body">
+                          <div class="input-group">
+                        <input type="number" class="
+                            form-control
+                            form-control-custom
+                            form-control-custom--outline
+                            form-control-custom--outline-thin
+                            t-text-white p-4 fw-bold
+                          " placeholder="0.00" name="amount" step="0.01" required="">
+                        <div class="input-group-append">
+                          <span style="border: none; border-radius: 0;" class="input-group-text orm-control
+                            form-control-custom
+                            form-control-custom--outline
+                            form-control-custom--outline-thin
+                            t-text-white p-4 fw-bold">USD</span>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="
+                            btn btn--lg
+                            button-solid
+                            btn-grad btn-grad--orange
+                            text-uppercase
+                            btn--sqr
+                            w-100 p-2 fw-bold
+                          " style="color: #fff" name="transfer_funds">Transfer</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-7">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <p class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Amount in Investment         
+              <svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The investment currently activated without pending">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>
+              </p>
+              </div>
+            <h6 class="t-text-white fw-bold text-uppercase">
+              0.00 usd
+            </h6>
+
+            <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
+            <p style="font-size: 16px">
+              Currently Invested
+            </p>
+            </div>
+          
+            <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
+              0.00 usd
+            </h3>
+
+            <p class="fw-bold text-capitalize t-text-white col-lg-10">Approx profit</p>
+
+            <hr style="border: 3px solid;">
+            <div class="col-sm-12 col-lg-10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
+              </svg>
+              <a href="investment_transaction_history.php" class="btn-grad--orange t-text-white" style="padding: 6px">Transaction history</a>
+              </div>
+
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+{% endblock content %}

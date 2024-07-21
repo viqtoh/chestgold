@@ -37,7 +37,28 @@ def login(request):
 
 @login_required
 def dashboard(request):
+    user = request.user
+    ref = user.get_ref()
     context ={
-        "user": request.user
+        "user": user,
+        "ref": ref
     }
     return render(request, "dashboard.html", context)
+
+
+@login_required
+def transactions(request):
+    user = request.user
+    context ={
+        "user": user,
+    }
+    return render(request, "transactions.html", context)
+
+
+@login_required
+def investments(request):
+    user = request.user
+    context ={
+        "user": user,
+    }
+    return render(request, "investments.html", context)

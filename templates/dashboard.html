@@ -1,314 +1,43 @@
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chestgold</title>
-    <!-- favicon -->
-    <link rel="icon" href="../assets/img/favicon.png" sizes="16x16" type="image/png" />
-    <!-- Stylesheet Link -->
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/addedstyle.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-      <style>
-            #translate-container {
-              width: 200px; /* Adjust the width as desired */
-              height: 40px; /* Adjust the height as desired */
-              position: relative;
-            }
+{% extends "base.html" %}
 
-            #google_translate_element {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-            }
-      </style>
+{% block title %}Dashboard{% endblock title %}
 
-      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<script>
-    function changeLanguage(lang) {
-  // Set the language cookie with an expiration date
-  var expiryDate = new Date();
-  expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-  document.cookie = "selectedLanguage=" + lang + "; expires=" + expiryDate.toUTCString();
-
-  // Reload the page to apply the language change
-  location.reload();
-}
-
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'en,fr,es,tr,ar,zh-CN,nl', // List of supported languages
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-
-  // Check if a language cookie exists and apply the stored language
-  var selectedLanguage = getCookie("selectedLanguage");
-  if (selectedLanguage !== "") {
-    googleTranslateElementInit._onload();
-    changeLanguage(selectedLanguage);
-  }
-}
-
-// Function to retrieve a specific cookie by name
-function getCookie(name) {
-  var cookies = document.cookie.split("; ");
-  for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i].split("=");
-    if (cookie[0] === name) {
-      return cookie[1];
-    }
-  }
-  return "";
-}
-
-
-</script>
-
-
-
-
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  </head>  <body class="t-bg-secondary"> <br>
-        <!-- Banner End -->
-    <div class="t-pt-50 t-pb-50">
-      <div class="container-fluid">
-        <div class="row g-3 g-xxl-5">
-          
-          <style>
-  /* Styles for the side nav scrollbar */
-  .vh-user-profile::-webkit-scrollbar {
-    width: 6px;
-    background-color: #f5f5f5;
-  }
-
-  .vh-user-profile::-webkit-scrollbar-thumb {
-    background-color: #6f42c1;
-    border-radius: 3px;
-  }
-
-  /* Styles for the side nav */
-  .vh-user-profile {
-    position: fixed;
-    top: 0;
-    left: 0%;
-    width: 25%;
-    height: 100vh;
-    overflow-y: auto;
-  }
-
-  /* Media query for smaller screens */
-  @media (max-width: 800px) {
-    .vh-user-profile {
-      position: static;
-      width: 100%;
-      height: auto;
-      overflow-y: visible;
-    }
-  }
-
-  .m-a-balance {
-    font-size: 12px;
-  }
-</style>
-<div class="col-md-3 col-xxl-3">
-              <!-- <center>
-                <a href="index.php">
-                  <b class="preloader__text text-capitalize w-logo" style="font-size: 20px; font-family: helvetica; color: #f4f4f4; text-shadow: 1px 1px 2px #f2f2f2f2; word-break: break-word; line-height: 25px; padding-left: 15%; padding-right: 15%; padding-bottom: 20px; width: 100%;">Chestgold</b> 
-                </a>
-              </center> -->
-            <div class="vh-user-profile">
-              <div class="vh-user-profile__info text-center mt-3 mb-4">
-                <h4 class="t-text-white text-capitalize">{{ user.get_name }}</h4>
-                <p class="mb-0 t-primary-clr">
-                  <a>{{ user.email }}</a>
-                </p>
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="vh-user-panel t-bg-alpha">
+      <ul
+        class="
+          list list--row
+          align-items-center
+          justify-content-center justify-content-lg-start
+        "
+      >
+        <div class="list--row__item d-lg-inline-block my-2 col-sm-5">
+          <h4 class="vh-user-panel__title t-text-white text-capitalize">Dashboard</h4>
+        </div>
+        <div class="list--row__item my-2 col-sm-6">
+          <ul class="list list--row align-items-center">
+            <li class="list--row__item">
+              <a href="index.php" class="d-flex vh-user__img vh-user__img--sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="my-2">
+              <div class="vh-multilang">
+                <select id="dropdown-menu">
+                  <option value="profile.php">Profile</option>
+                  <option value="change_password.php.php">Change pin</option>
+                  <option value="logout.php">Log out</option>
+                </select>
               </div>
-              <div class="text-end">
-                  <button type="button" class="btn btn-light btn-block vh-nav--toggle d-lg-none" onclick="toggleMenu()">
-                    <i class="bx bx-menu"></i>
-                  </button>
-              </div>
-
-              <div class="m-a-balance vh-user-profile__info mt-3 mb-4">
-                <div class="accordion" id="accordionFlushExample">
-                  <div class="accordion-item" style="background-color: #31065B; border: none">
-                    <h6 class="t-text-white text-capitalize accordion-header" id="flush-headingOne">
-                      <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" onclick="toggleAccordion('flush-collapseOne')" style="color: #f2f2f2; font-size: 12px">
-                        MAIN ACCOUNT BALANCE
-                        <i id="accordion-icon" class="fas fa-plus float-end" style="margin-left: 98px; margin-top: 5px;"></i>
-                      </button>
-                    </h6>
-
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px; color: #fd7e14">0.00 USD</h6>
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px">0.00 USDT</h6>
-                        <div class="row t-text-white">
-                          <div class="col-sm-6">
-                            <p>profits (7d)</p>
-                          </div>
-                          <div class="col-sm-6">
-                            <p>0.00 USD</p>
-                          </div>
-                          <div class="col-sm-6">
-                            <p>Deposit in orders</p>
-                          </div>
-                          <div class="col-sm-6">
-                            <p>0.04 USD</p>
-                          </div>
-                          <div class="col-sm-6">
-                            <a href="deposit.php">
-                              <button class="btn btn-block btn btn-secondary mt-2"><b>Deposit</b></button>
-                            </a>
-                          </div>
-                          <div class="col-sm-6">
-                            <a href="withdraw.php">
-                              <button class="btn btn-block btn btn-warning mt-2"><b>Withdraw</b></button>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                    <script>
-                      function toggleAccordion(targetId) {
-                        var targetElement = document.getElementById(targetId);
-                        var isExpanded = targetElement.classList.contains('show');
-                        var accordionIcon = document.getElementById('accordion-icon');
-
-                        if (isExpanded) {
-                          targetElement.classList.remove('show');
-                          accordionIcon.classList.remove('fa-minus');
-                          accordionIcon.classList.add('fa-plus');
-                        } else {
-                          targetElement.classList.add('show');
-                          accordionIcon.classList.remove('fa-plus');
-                          accordionIcon.classList.add('fa-minus');
-                        }
-                      }
-
-                    </script>
-              <ul id="menuList" class="list list--column">
-                <li class="list--column__item-sm">
-                  <a href="index.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
-                      </svg>
-                    </b>
-                    Dashboard</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="transaction.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
-                      </svg>
-                    </b>
-                    Transaction</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="investment.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
-                        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
-                      </svg>
-                    </b>
-                    Investment</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="plans.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16">
-                        <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"/>
-                      </svg>
-                    </b>
-                    Our plans</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="profile.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-                      </svg>
-                    </b>
-                    Profile</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="referrals.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-                      <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
-                      </svg>
-                    </b>
-                    Referrals</a>
-                </li>
-                <li class="list--column__item-sm">
-                  <div style="display: inline;" id="translate-container">
-                        <div id="google_translate_element"></div>
-                  </div>
-                </li>
-                <li class="list--column__item-sm">
-                  <a href="logout.php" class="t-link vh-user-profile__link text-capitalize">
-                    <b style="padding-right: 10%;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
-                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                      </svg>
-                    </b>
-                    Logout</a>
-                </li>
-                <!-- ... Rest of the menu items ... -->
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-9 col-xxl-9">
-            <div class="vh-user-panel t-bg-alpha">
-              <ul
-                class="
-                  list list--row
-                  align-items-center
-                  justify-content-center justify-content-lg-start
-                "
-              >
-                <div class="list--row__item d-lg-inline-block my-2 col-sm-5">
-                  <h4 class="vh-user-panel__title t-text-white text-capitalize">
-                    Dashboard
-                  </h4>
-                </div>
-                <div class="list--row__item my-2 col-sm-6">
-                  <ul class="list list--row align-items-center">
-                    <li class="list--row__item">
-                      <a href="index.php" class="d-flex vh-user__img vh-user__img--sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="my-2">
-                      <div class="vh-multilang">
-                        <select id="dropdown-menu">
-                          <option value="profile.php">Profile</option>
-                          <option value="change_password.php.php">Change pin</option>
-                          <option value="logout.php">Log out</option>
-                        </select>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </ul>
-            </div>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </div>
             <div class="mt-5">
               <div class="row g-3 g-xl-4">
                 <div class="col-md-6 col-lg-4">
@@ -409,7 +138,7 @@ function getCookie(name) {
                           form-control-custom--outline
                           form-control-custom--outline-thin
                           t-text-white
-                        " readonly value="https://Chestgold.pro/signup?refer=9UcEUAXb1L" style="cursor: default; text-align: center;"/>
+                        " readonly value="https://Chestgold.pro/signup?refer={{ ref }}" style="cursor: default; text-align: center;"/>
                         </div>
                         <div class="col-2 input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="copyButton">
@@ -426,79 +155,4 @@ function getCookie(name) {
               </div>
             </div>
           </div>
-
-            <!-- Footer  -->
-    <footer class="vh-footer-primary mt-5">
-      <div class="vh-footer-primary__container t-pt-100">
-        <div class="vh-footer-primary__copyright">
-          <div class="container">
-            <div class="row g-3 justify-content-center">
-              <div class="col">
-                <p class="mb-0 t-text-white text-center text-capitalize">
-                  Copyright &copy; 2024 All Rights Reserved
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- Footer End -->
-
-    <!-- Scripts  -->
-
-    <script>
-        // Adjust the size of the Google Translate widget container
-function resizeTranslateContainer(width, height) {
-  var translateContainer = document.getElementById('translate-container');
-  if (translateContainer) {
-    translateContainer.style.width = width + 'px';
-    translateContainer.style.height = height + 'px';
-  }
-}
-
-// Call the resize function with your desired width and height values
-resizeTranslateContainer(200, 40); // Adjust the width and height as desired
-    </script>
-
- <!-- for dropdown options carrying profile, account, logout -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#dropdown-menu').change(function() {
-      var selectedOption = $(this).val();
-      if (selectedOption) {
-        window.location.href = selectedOption;
-      }
-    });
-  });
-</script>
-    <!-- Add Font Awesome JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/jquery.nice-select.js"></script>
-    <script src="../assets/js/bootstrap.bundle.js"></script>
-    <script src="../assets/js/slick.js"></script>
-    <script src="../assets/js/odometer.js"></script>
-    <script src="../assets/js/apexcharts.js"></script>
-    <script src="../assets/js/revenue-chart.js"></script>
-    <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/addedjs.js"></script>
-  </body>
-</html>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <!-- Back To Top -->
-    <div class="back-to-top">
-      <span class="back-top">
-        <i class='bx bxs-chevron-up'></i>
-      </span>
-    </div>
-    <!-- Back To Top End -->
+{% endblock content %}
