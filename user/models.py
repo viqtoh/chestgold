@@ -28,11 +28,11 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "email"
 
-    @property
-    def get_full_name(self) -> str:
-        return super().get_full_name()
-
     def __str__(self):
         return self.email
-
-
+    
+    def get_name(self):
+        name = self.first_name if self.first_name else ""
+        if self.last_name:
+            name += " " + self.last_name
+        return name
