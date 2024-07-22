@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pay BTC{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="mt-5">
+    <div class="row g-3 g-xl-4">
+        <div class="col-12">
+          <div class="vh-auth">
+            <div class="row g-4">
+              <div class="col-lg-12" style="margin: auto;">
+                    <h4 class="vh-query__title fw-bold text-center t-text-white text-capitalize" style="font-size: 20px">
+                  SEND <b style="color: #dc3545; font-size: 18px">{{ amount }} BTC</b>
+                    </h4>
+                    <p class="t-text-white text-center text-capitalize" style="font-size: 14px;">TO THE WALLET ADDRESS BELOW{% if address.get_qr %} OR SCAN THE QR CODE{% endif %} WITH YOUR WALLET APP</p>
+
+                    {% if not err %}
+                  <div class="row">  
+                  <div class="col-sm-10 col-lg-8" style="margin: auto;">
+                    <input class="
+                        form-control
+                        form-control-custom--outline
+                        form-control-custom--outline-thin
+                        t-text-white
+                      " readonly="" value="{{ address.address }}" style="cursor: default; text-align: center;">
+                      </div>
+                      <div class="col-sm-2 col-lg-2 input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="copyButton">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                      {% if address.get_qr %}
+                      <div class="pt-5">
+                         <center>
+                            <img src="{{ address.get_qr }}" class="my-3" style="width:200px; height:200px"> 
+                         </center> 
+                      </div>
+                      {% endif %}
+                      <div class="col-lg-6 pt-5" style="margin:auto;">
+                        <form method="POST" action="btc_pay_code.php">
+                              <button type="submit" class="
+                                  btn btn--lg
+                                  button-solid
+                                  btn-grad btn-grad--orange
+                                  text-uppercase
+                                  btn--sqr
+                                  w-100 p-2 fw-bold
+                                " style="color: #fff" name="confirm_deposit">
+                                Confirm Deposit
+                              </button>
+                          </form>
+                            </div>  
+                    </div>
+                  </div>
+
+                  {% else %}
+                  <div class="row">  
+                    <div class="col-sm-10 col-lg-8" style="margin: auto;">
+                        <p class="text-danger mt-5 text-center text-capitalize" style="font-size: 18px;">{{ err }}</p>
+                    </div>
+                  </div>
+
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

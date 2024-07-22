@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Insufficient Funds{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="mt-5">
+    <div class="row g-3 g-xl-4">
+        <div class="col-12">
+          <div class="vh-auth">
+            <div class="row g-4">
+              <div class="col-lg-8" style="margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16" style="color: orange;">
+                  <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                  <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"></path>
+                </svg>
+                    <h4 class="vh-query__title fw-bold t-text-white text-capitalize">
+                  Insufficient funds in account
+                    </h4>
+                    <p class="t-text-white">We regret that you have insufficient funds in your account. Please make a deposit and try again once funds are sufficient.</p>
+                    <p class="t-text-white text-capitalize">
+                      <small>Deposit instantly using our available payment method.</small>
+                    </p>
+                    <a href="{% url 'deposit' %}">
+                    <button class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-50 p-2 fw-bold" style="color: #fff;">Deposit Now</button>
+                    </a> <br><br>
+                    <p class="t-text-white text-capitalize">
+                      <small>Please feel free to contact us if you face any problem.</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock content %}

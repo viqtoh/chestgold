@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from user.managers import CustomUserManager
@@ -24,6 +24,10 @@ class User(AbstractUser):
     postal_code = models.CharField(max_length=250, null=True, blank=True)
     status = models.CharField(max_length=255, default="available")
     ref = models.CharField(max_length=255, null=True, blank=True)
+    dep_type = models.CharField(max_length=255, null=True, blank=True)
+    usd = models.FloatField(null=True, blank=True)
+    btc = models.FloatField(null=True, blank=True)
+    
 
 
     objects = CustomUserManager()
@@ -55,3 +59,21 @@ class User(AbstractUser):
         if(not self.ref):
             self.gen_ref()
         return self.ref
+    
+
+class Address(models.Model):
+    address = models.CharField(max_length=255)
+    qr_code = models.ImageField(upload_to="QR/", blank=True, null=True)
+    active = models.BooleanField(default=True)
+
+    def get_qr(self):
+        try:
+            return self.qr_code.url
+        except ValueError:
+            return ""
+        
+    def save(self, *args, **kwargs):
+        if self.active:
+            with transaction.atomic():
+                Address.objects.exclude(id=self.id).update(active=False)
+        super().save(*args, **kwargs)

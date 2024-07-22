@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Deposit{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="vh-user-panel t-bg-alpha">
+      <ul class="
+          list list--row
+          align-items-center
+          justify-content-center justify-content-lg-start
+        ">
+        <div class="list--row__item d-lg-inline-block my-2 col-sm-5">
+          <h4 class="vh-user-panel__title t-text-white text-capitalize">
+            Deposit
+          </h4>
+        </div>
+        <div class="list--row__item my-2 col-sm-6">
+          <ul class="list list--row align-items-center">
+            <li class="list--row__item">
+              <a href="index.php" class="d-flex vh-user__img vh-user__img--sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
+                </svg>
+              </a>
+            </li>
+            <li class="my-2">
+              <div class="vh-multilang">
+                <select id="dropdown-menu" style="display: none;">
+                  <option value="profile.php">Profile</option>
+                  <option value="account.php">Account</option>
+                  <option value="logout.php">Log out</option>
+                </select><div class="nice-select" tabindex="0"><span class="current">Profile</span><ul class="list"><li data-value="profile.php" class="option selected">Profile</li><li data-value="account.php" class="option">Account</li><li data-value="logout.php" class="option">Log out</li></ul></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+
+<div class="mt-5">
+<div class="row g-3 g-xl-4">
+  <div class="col-12">
+    <div class="vh-auth">
+      <div class="row g-4">
+        <div class="col-lg-12" style="margin: auto;">
+              <h4 class="vh-query__title fw-bold text-center t-text-white text-capitalize">
+            Deposit Funds
+              </h4>
+              {% if deposit_type == "btc" %}
+              <p class="t-text-white text-center text-capitalize">Via Crypto</p>
+              <p class="t-text-white text-center text-capitalize" style="font-size: 12px;">Deposit and earn up to 60% interest APY On your idle crypto.</p>
+              {% else %}
+              <p class="t-text-white text-center text-capitalize" style="font-size: 14px;">Only request payment details when you are ready to make payment</p>
+              {% endif %}
+            <div class="row">  
+                  <div class="vh-query t-bg-alpha">
+                    <form method="POST" class="row g-4" id="contact_form_submit">
+                      {% csrf_token %}
+                      <div style="margin: auto;" class="col-sm-12 col-lg-6">
+                        <div class="input-group">
+                        <input type="number" class="
+                            form-control
+                            form-control-custom
+                            form-control-custom--outline
+                            form-control-custom--outline-thin
+                            t-text-white p-4 fw-bold
+                          " placeholder="0.00" oninput="convertCoin()" id="amount" inputmode="decimal" step="0.01" min="1000" name="usd_amount" required="">
+                        <input type="hidden" onchange="convertCoin()" name="payment_method" id="payment_method" style="border-radius: 7px; font-size: 0.75rem;" value="BTC">
+                        <input type="hidden" name="btc_amount" id="conversion" value="">
+                        <div class="input-group-append">
+                          <span style="border: none; border-radius: 0;" class="input-group-text orm-control
+                            form-control-custom
+                            form-control-custom--outline
+                            form-control-custom--outline-thin
+                            t-text-white p-4 fw-bold">USD</span>
+                        </div>
+                        </div>
+                        <div class="row t-text-white text-center fw-bold text-capitalize" style="font-size: 16px;">
+                          <div class="col-lg-6">
+                            <p>Minimum 1000.00 USD</p>
+                          </div>
+                          <div class="col-lg-6">
+                            <p style="color: #dc3545" id="coinAmountHandler"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" name="btc_deposit" class="
+                            btn btn--lg
+                            button-solid
+                            btn-grad btn-grad--orange
+                            text-uppercase
+                            btn--sqr
+                            w-100 p-2 fw-bold
+                          " style="color: #fff">
+                          Continue to deposit
+                        </button>
+                      </div>
+                    </form>
+                  </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+// pass the value of the center element with id=coinAmountHandler into the form
+document.querySelector('form').addEventListener('submit', function() {
+var coinAmount = document.getElementById('coinAmountHandler').innerText;
+document.getElementById('conversion').value = coinAmount;
+});
+
+function convertCoin() {
+  if("{{ deposit_type }}" == "btc"){
+    let amount = Number($("#amount").val());
+    let coin = $("#payment_method").val();
+    if (amount == null || amount === 0) {
+        $("#coinAmountHandler").text(``);
+    } else {
+        if (coin === 'BTC') {
+            fetch(`https://blockchain.info/tobtc?currency=USD&value=${amount}`)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((btc) => {
+                    $("#coinAmountHandler").text(`${btc.toFixed(4)} BTC`);
+                    $("#crypto").val(btc.toFixed(5))
+                });
+        }
+    }
+  }
+}
+</script>
+{% endblock content %}

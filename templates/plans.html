@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}Plans{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="row vh-user-panel t-bg-alpha">
+        <div class="list--row__item d-lg-inline-block text-center my-2 col-lg-12 col-sm-12">
+          <h3 class="vh-user-panel__title t-text-white text-capitalize">
+            Investment Plans
+          </h3>
+          <p class="t-text-white text-capitalize">
+            Here are several of our plans you can invest in. Choose your investment plan and start earning now
+          </p>
+          <p class="t-text-white text-capitalize">
+            <small>Choose your plan and start earning now.</small>
+          </p>
+        </div>                
+    </div>
+    <style>
+      .mt-5 .row.text-capitalize.t-text-white .col-6 p  {
+              font-size: 12px;
+      }
+
+      .mt-5 .row.text-capitalize.t-text-white .col-12 p  {
+              line-height: 4px;
+      }
+    </style>
+    <div class="mt-5">
+      <div class="row g-3 g-xl-4">
+        <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Platinum Plan         
+              </h3>
+              </div>
+            <div class="row t-text-white col-lg-12">
+            <p style="font-size: 12px">
+              Invest for long term &amp; earn more.
+            </p>
+            </div>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-6">
+                <p>6.00%</p>
+              </div>
+              <div class="col-6">
+                 <p>1</p>
+              </div>
+              <div class="col-6">
+                <p>Weekly Interest</p>
+              </div>
+              <div class="col-6">
+                 <p>Term Week</p>
+              </div>
+              
+            </div>
+
+            <hr>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                <p>Min Deposit - <b>1,000.00 USD</b></p>
+                 <p>Max Deposit - 5,000.00 USD</p>
+                 <p>Term Duration - 1 week</p>
+                 <p>Payout Term - After maturity</p>
+                 <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>  - End of Term</p>
+              <p>Total Return - 6%</p>  
+
+              </div>
+              
+            </div>
+          
+            <div class="col-12">
+              <form method="POST"> {% csrf_token %}
+              <button type="submit" name="platinum" class="btn btn-block btn-secondary mt-2">
+                <b>Invest Now
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </b>
+              </button>
+              </form>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Gold Plan         
+              </h3>
+              </div>
+            <div class="row t-text-white col-lg-12">
+            <p style="font-size: 12px">
+              Invest for long term &amp; earn more.
+            </p>
+            </div>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-6">
+                <p>12.00%</p>
+              </div>
+              <div class="col-6">
+                 <p>1</p>
+              </div>
+              <div class="col-6">
+                <p>Weekly Interest</p>
+              </div>
+              <div class="col-6">
+                 <p>Term Week</p>
+              </div>
+              
+            </div>
+
+            <hr>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                <p>Min Deposit - <b>5,000.00 USD</b></p>
+                 <p>Max Deposit - 20,000.00 USD</p>
+                 <p>Term Duration - 1 week</p>
+                 <p>Payout Term - After maturity</p>
+                 <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>  - End of Term</p>
+              <p>Total Return - 12%</p>  
+
+              </div>
+              
+            </div>
+          
+            <div class="col-12">
+              <form method="POST"> {% csrf_token %}
+              <button type="submit" name="gold" class="btn btn-block btn-secondary mt-2">
+                <b>Invest Now
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </b>
+              </button>
+              </form>
+              </div>
+          </div>
+        </div>
+
+         <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Silver Plan         
+              </h3>
+              </div>
+            <div class="row t-text-white col-lg-12">
+            <p style="font-size: 12px">
+              Invest for long term &amp; earn more.
+            </p>
+            </div>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-6">
+                <p>24.00%</p>
+              </div>
+              <div class="col-6">
+                 <p>1</p>
+              </div>
+              <div class="col-6">
+                <p>Weekly Interest</p>
+              </div>
+              <div class="col-6">
+                 <p>Term Week</p>
+              </div>
+              
+            </div>
+
+            <hr>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                <p>Min Deposit - <b>20,000.00 USD</b></p>
+                 <p>Max Deposit - 50,000.00 USD</p>
+                 <p>Term Duration - 1 week</p>
+                 <p>Payout Term - After maturity</p>
+                 <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>  - End of Term</p>
+              <p>Total Return - 24%</p>  
+
+              </div>
+              
+            </div>
+          
+            <div class="col-12">
+              <form method="POST"> {% csrf_token %}
+              <button type="submit" name="silver" class="btn btn-block btn-secondary mt-2">
+                <b>Invest Now
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </b>
+              </button>
+              </form>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+          <div class="vh-user-card t-bg-gradient-orange">
+            <div class="row">
+            <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+              Retirement Plan      
+              </h3>
+              </div>
+            <div class="row t-text-white col-lg-12">
+            <p style="font-size: 12px">
+              Invest for long term &amp; earn more.
+            </p>
+            </div>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-6">
+                <p>120.00%</p>
+              </div>
+              <div class="col-6">
+                 <p>1</p>
+              </div>
+              <div class="col-6">
+                <p>Monthly Interest</p>
+              </div>
+              <div class="col-6">
+                 <p>Term month</p>
+              </div>
+              
+            </div>
+
+            <hr>
+
+            <div class="row text-capitalize t-text-white">
+              <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                <p>Min Deposit - <b>50,000.00 USD</b></p>
+                 <p>Max Deposit - 5,000,000.00 USD</p>
+                 <p>Term Duration - 1 Month</p>
+                 <p>Payout Term - After maturity</p>
+                 <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+              </svg>  - End of Term</p>
+              <p>Total Return - 120%</p>  
+
+              </div>
+              
+            </div>
+          
+            <div class="col-12">
+              <form method="POST"> {% csrf_token %}
+              <button type="submit" name="retirement" class="btn btn-block btn-secondary mt-2">
+                <b>Invest Now
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                  </svg>
+                </b>
+              </button>
+              </form>
+              </div>
+
+          </div>
+        </div>
+
+
+
+        
+
+       
+      </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="mt-5">
+    <div class="row g-3 g-xl-4">
+        <div class="col-12">
+          <div class="vh-auth">
+            <div class="row g-4">
+              <div class="col-lg-12" style="margin: auto;">
+                    <h4 class="vh-query__title fw-bold text-center t-text-white text-capitalize" style="font-size: 20px">
+                  Update Profile
+                    </h4>
+                    <p class="t-text-white text-center text-capitalize" style="font-size: 14px;">Change your profile information to reflect most recent updates</p>
+                  <div class="row"> 
+                       
+                        <div class="vh-query t-bg-alpha">
+                          <form method="POST" action="profile_code.php" class="row g-4" id="contact_form_submit">
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="text" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Full Name" name="full_name" value="Victor Zazz" required="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="email" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Email" name="email" value="virex001@gmail.com" required="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="telephone" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Phone Number" name="phone" value="+2349045555609">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="text" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Next of Kin Name" name="next_of_kin" value="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="number" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Next of Kin Phone Number" name="next_of_kin_phone" value="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="text" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Country" name="country" value="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <div class="input-group">
+                              <input type="text" class="
+                                  form-control
+                                  form-control-custom
+                                  form-control-custom--outline
+                                  form-control-custom--outline-thin
+                                  t-text-white p-4 fw-bold
+                                " placeholder="Address" name="address" value="">
+                              </div>
+                            </div>
+                            <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
+                              <p class="fw-bold t-text-white text-capitalize">Gender</p>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male">
+                                <label class="form-check-label fw-bold t-text-white text-capitalize" for="flexRadioDefault1">
+                                  Male
+                                </label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
+                                <label class="form-check-label fw-bold t-text-white text-capitalize" for="flexRadioDefault2">
+                                  Female
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" name="profile" class="
+                                  btn btn--lg
+                                  button-solid
+                                  btn-grad btn-grad--orange
+                                  text-uppercase
+                                  btn--sqr
+                                  w-100 p-2 fw-bold
+                                " style="color: #fff">
+                                Update Profile
+                              </button>
+                            </div>
+                          </form>
+                        </div>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock content %}
