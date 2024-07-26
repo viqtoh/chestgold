@@ -5,6 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 # Register your models here.
 
+
+
+admin.site.register(Transaction)
 class UserAdmin(BaseUserAdmin):
     ordering = ("id", "email")
     search_fields = ("email",)
@@ -17,6 +20,7 @@ class UserAdmin(BaseUserAdmin):
             _("Personal info"),
             {
                 "fields": (
+                    "transactions",
                     "first_name",
                     "last_name",
                     "date_of_birth",

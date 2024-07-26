@@ -4,6 +4,13 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+import random
+from django.utils import timezone
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core import mail
+from datetime import datetime, timedelta, date
+from django.conf import settings
 
 
 # Create your views here.
@@ -11,6 +18,12 @@ from django.urls import reverse
 
 def index(request):
     return render(request, "index.html")
+
+def no_auth_plans(request):
+    return render(request, "no_auth_plan.html")
+
+def contact(request):
+    return render(request, "contact.html")
 
 
 
@@ -35,13 +48,106 @@ def login(request):
             context["error"] = "Incorrect Email or Password."
     return render(request, 'signin.html', context)
 
+
+def signup(request):
+    context = {}
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        if full_name:
+            parts = full_name.split(' ', 1)
+            first_name = parts[0]
+            last_name = parts[1] if len(parts) > 1 else ''
+        user = User.objects.filter(email=email).first()
+        if(user):
+            return render(request, 'signup.html', {"error": "Email already exists"})
+        nwuser = User(email=email, first_name=first_name, last_name=last_name, is_active=False, phone_number=phone)
+        nwuser.save()
+        nwuser.set_password(password)
+        random_numbers = [random.randint(0, 9) for _ in range(6)]
+        otp = ''.join(map(str, random_numbers))
+        nwuser.email_confirmation_code= otp
+        nwuser.otpt=timezone.now()
+        nwuser.save()
+        html_message = render_to_string('confirm_template.html', {'otp':otp, "name": nwuser.get_name() })
+        plain_message = strip_tags(html_message)
+        mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
+        url = reverse("confirm_email", args=[email])
+        return redirect(url)
+    return render(request, 'signup.html', context)
+
+
+def resend_confirmation(request,email):
+    context = {}
+    user = User.objects.filter(email=email).first()
+    if(not user):
+        return render(request, 'signup.html', {"error": "Email not registered"})
+    random_numbers = [random.randint(0, 9) for _ in range(6)]
+    otp = ''.join(map(str, random_numbers))
+    user.email_confirmation_code= otp
+    user.otpt=timezone.now()
+    user.save()
+    html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name() })
+    plain_message = strip_tags(html_message)
+    mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
+    url = reverse("confirm_email", args=[email])
+    return redirect(url)
+
+
+
+def forgot_password(request):
+    context = {}
+    if(request.method == "POST"):
+        email = request.POST.get("email")
+        user = User.objects.filter(email=email).first()
+        if(not user):
+            return render(request, 'signup.html', {"error": "Email not registered"})
+        random_numbers = [random.randint(0, 9) for _ in range(6)]
+        otp = ''.join(map(str, random_numbers))
+        user.email_confirmation_code= otp
+        user.otpt=timezone.now()
+        user.save()
+        html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name() })
+        plain_message = strip_tags(html_message)
+        mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
+        url = reverse("confirm_email", args=[email])
+        return redirect(url)
+    return render(request, "forgot_password.html", context)
+
+
+def confirm_email(request,email):
+    context = {}
+    if request.method == "POST":
+        code = request.POST.get("code")
+        user = User.objects.filter(email=email).first()
+        if(user):
+            time_difference = abs(user.otpt - timezone.now())
+            if time_difference > timedelta(minutes=15):
+                return {"ok": False, "message":"otp expired"}
+            if(user.email_confirmation_code == code):
+                user.is_active = True
+                user.save()
+                return redirect("login")
+        else:
+            context["error"] = "Invalid Code"
+    return render(request, 'confirm_email.html', context)
+
 @login_required
 def dashboard(request):
-    user = request.user
+    user:User = request.user
     ref = user.get_ref()
+    
     context ={
         "user": user,
-        "ref": ref
+        "ref": ref,
+        "balance": user.get_balance(),
+        "total_withdrawn": user.get_total_withdrawal(),
+        "total_withdrawn_m": user.get_total_withdrawal_this_month(),
+        "total_deposited": user.get_total_deposit(),
+        "total_deposited_m": user.get_total_deposit_this_month(),
+        "inv_acc": 0
     }
     return render(request, "dashboard.html", context)
 
@@ -49,8 +155,11 @@ def dashboard(request):
 @login_required
 def transactions(request):
     user = request.user
+    transactions = user.transactions.all()
+
     context ={
         "user": user,
+        "transactions":transactions,
     }
     return render(request, "transactions.html", context)
 
@@ -60,6 +169,7 @@ def investments(request):
     user = request.user
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "investments.html", context)
 
@@ -70,6 +180,7 @@ def plans(request):
         return redirect("subscribe")
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "plans.html", context)
 
@@ -78,6 +189,7 @@ def profile(request):
     user = request.user
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "profile.html", context)
 
@@ -87,6 +199,7 @@ def change_password(request):
     user = request.user
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "change_password.html", context)
 
@@ -96,6 +209,7 @@ def subscribe(request):
     user = request.user
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return redirect("insufficient")
 
@@ -104,6 +218,7 @@ def insufficient(request):
     user = request.user
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "insufficient.html", context)
 
@@ -113,7 +228,8 @@ def referrals(request):
     ref = user.get_ref()
     context ={
         "user": user,
-        "ref":ref
+        "ref":ref,
+        "balance": user.get_balance(),
     }
     return render(request, "referrals.html", context)
 
@@ -126,6 +242,7 @@ def deposit(request):
         return redirect("deposit_amount")
     context ={
         "user": user,
+        "balance": user.get_balance(),
     }
     return render(request, "deposit.html", context)
 
@@ -144,7 +261,8 @@ def deposit_amount(request):
             return redirect("pay_other")
     context ={
         "user": user,
-        "deposit_type": user.dep_type
+        "deposit_type": user.dep_type,
+        "balance": user.get_balance(),
     }
     return render(request, "deposit_amount.html", context)
 
@@ -158,7 +276,8 @@ def pay_btc(request):
         "user": user,
         "deposit_type": user.dep_type,
         "address": address,
-        "amount": user.btc
+        "amount": user.btc,
+        "balance": user.get_balance(),
     }
     return render(request, "bitcoin.html", context)
 
@@ -167,7 +286,8 @@ def pay_other(request):
     user = request.user
     context ={
         "user": user,
-        "deposit_type": user.dep_type
+        "deposit_type": user.dep_type,
+        "balance": user.get_balance(),
     }
     return render(request, "deposit_other.html", context)
 

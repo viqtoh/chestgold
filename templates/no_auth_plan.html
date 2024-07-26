@@ -1,0 +1,596 @@
+{% load static %}
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crestmetals</title>
+    <!-- favicon -->
+    <link rel="icon" href="assets/img/favicon.png" sizes="16x16" type="image/png">
+    <!-- Stylesheet Link -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/addedstyle.css' %}">
+
+     <style>
+            #translate-container {
+              width: 200px; /* Adjust the width as desired */
+              height: 40px; /* Adjust the height as desired */
+              position: relative;
+            }
+
+            #google_translate_element {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
+      </style>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=Ohg/d=0/rs=AN8SPfocrRO-f5jO91h2UqcrdJsFzeCmQQ/m=el_main_css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/_/translate_http/_/js/k=translate_http.tr.en_GB.Z_TMjM0l0CY.O/am=AIA/d=1/exm=el_conf/ed=1/rs=AN8SPfrYtg3hAGN-tgR5lj1BMQh-pAjqCw/m=el_main"></script>
+
+<script>
+    function changeLanguage(lang) {
+  // Set the language cookie with an expiration date
+  var expiryDate = new Date();
+  expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+  document.cookie = "selectedLanguage=" + lang + "; expires=" + expiryDate.toUTCString();
+
+  // Reload the page to apply the language change
+  location.reload();
+}
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,fr,es,tr,ar,zh-CN,nl', // List of supported languages
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+
+  // Check if a language cookie exists and apply the stored language
+  var selectedLanguage = getCookie("selectedLanguage");
+  if (selectedLanguage !== "") {
+    googleTranslateElementInit._onload();
+    changeLanguage(selectedLanguage);
+  }
+}
+
+// Function to retrieve a specific cookie by name
+function getCookie(name) {
+  var cookies = document.cookie.split("; ");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].split("=");
+    if (cookie[0] === name) {
+      return cookie[1];
+    }
+  }
+  return "";
+}
+
+
+</script>
+  </head>
+  <body class="t-bg-secondary">
+    <!-- Preloader -->
+    <div class="preloader" style="display: none;">
+      <div class="preloader__container">
+        <div class="preloader__text text-capitalize" style="animation-delay: 0s;">Crestmetals</div>        
+      </div>
+    </div>
+    <!-- Preloader -->
+
+    <!-- Hero  -->
+    <div class="vh-banner">
+      <header class="vh-header">
+        <div class="container">
+          <div class="row g-3 align-items-center">
+            <div class="col-sm-12 col-lg-3">
+              <!-- Logo  -->
+              <center><a href="{% url 'index' %}">
+                <b class="preloader__text text-capitalize" style="font-size: 25px; font-family: helvetica; color: rgb(244, 244, 244); text-shadow: rgba(242, 242, 242, 0.95) 1px 1px 2px; word-break: break-word; line-height: 25px; animation-delay: 1s;">Crestmetals</b> 
+              </a></center>
+              <!-- Logo End -->
+            </div>
+            <div class="col-9 col-lg-9">
+              <div class="vh-nav-container">
+                <!-- Navigation Toggler  -->
+                <div class="text-end">
+                  <button type="button" class="btn vh-nav--toggle d-lg-none">
+                    <i class="bx bx-menu"></i>
+                  </button>
+                </div>
+                <!-- Navigation Toggler End -->
+
+                <!-- Navigation  -->
+                <nav class="vh-nav">
+                  <!-- Primary Menu  -->
+                  <ul class="list vh-primary-menu">
+                    <li class="vh-primary-menu__list">
+                      <a href="{% url 'index' %}" class="vh-primary-menu__link text-capitalize">
+                        home
+                      </a>
+                    </li>
+                    <li class="vh-primary-menu__list">
+                      <a href="{% url 'no_auth_plans' %}" class="vh-primary-menu__link text-capitalize">Our plans</a>
+                    </li>
+                    <li class="vh-primary-menu__list">
+                      <a href="{% url 'contact' %}" class="vh-primary-menu__link text-capitalize">support</a>
+                    </li>
+                  </ul>
+                  <!-- Primary Menu End -->
+                  <!-- User Login  -->
+                  <div class="mx-3">
+                    <ul class="list vh-primary-menu vh-primary-menu--alt">
+                      <li class="vh-primary-menu__list text-center">
+                        <a href="{% url 'signup' %}" class="
+                            btn
+                            button-outline
+                            button-outline--exception
+                            button-outline--gradient-orange
+                            text-uppercase
+                            w-100
+                          ">
+                          sign up
+                        </a>
+                      </li>
+                      <li class="vh-primary-menu__list text-center">
+                        <a href="{% url 'login' %}" class="
+                            btn
+                            button-solid
+                            btn-grad btn-grad--orange
+                            text-uppercase
+                            w-100
+                          ">
+                          login
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- User Login End -->
+                </nav>
+                <!-- Navigation End -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+<div class="mt-4 mb-4">
+      <div class="container">
+        <div class="row g-3 g-xxl-5">
+
+          <div class="col-md-12 col-xxl-12">
+            <div class="row vh-user-panel t-bg-alpha">
+                <div class="list--row__item d-lg-inline-block text-center my-2 col-lg-12 col-sm-12">
+                  <h3 class="vh-user-panel__title t-text-white text-capitalize">
+                    Investment Plans
+                  </h3>
+                  <p class="t-text-white text-capitalize">
+                    Here are several of our plans you can invest in. Choose your investment plan and start earning now
+                  </p>
+                  <p class="t-text-white text-capitalize">
+                    <small>Choose your plan and start earning now.</small>
+                  </p>
+                </div>                
+            </div>
+            <style>
+              .mt-5 .row.text-capitalize.t-text-white .col-6 p  {
+                      font-size: 12px;
+              }
+
+              .mt-5 .row.text-capitalize.t-text-white .col-12 p  {
+                      line-height: 4px;
+              }
+            </style>
+            <div class="mt-5">
+              <div class="row g-3 g-xl-4">
+                <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                  <div class="vh-user-card t-bg-gradient-orange">
+                    <div class="row">
+                    <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+                      Platinum Plan         
+                      </h3>
+                      </div>
+                    <div class="row t-text-white col-lg-12">
+                    <p style="font-size: 12px">
+                      Invest for long term &amp; earn more.
+                    </p>
+                    </div>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-6">
+                        <p>6.00%</p>
+                      </div>
+                      <div class="col-6">
+                         <p>1</p>
+                      </div>
+                      <div class="col-6">
+                        <p>Weekly Interest</p>
+                      </div>
+                      <div class="col-6">
+                         <p>Term Week</p>
+                      </div>
+                      
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                        <p>Min Deposit - <b>1,000.00 USD</b></p>
+                         <p>Max Deposit - 5,000.00 USD</p>
+                         <p>Term Duration - 1 week</p>
+                         <p>Payout Term - After maturity</p>
+                         <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="The invested amount will be returned at the end of term">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                      </svg>  - End of Term</p>
+                      <p>Total Return - 6%</p>  
+
+                      </div>
+                      
+                    </div>
+                  
+                    <div class="col-12">
+                      <a href="{% url 'signup' %}">
+                      <button type="button" class="btn btn-block btn-secondary mt-2">
+                        <b>Invest Now
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                      </a>
+                     </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                  <div class="vh-user-card t-bg-gradient-orange">
+                    <div class="row">
+                    <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+                      Gold Plan         
+                      </h3>
+                      </div>
+                    <div class="row t-text-white col-lg-12">
+                    <p style="font-size: 12px">
+                      Invest for long term &amp; earn more.
+                    </p>
+                    </div>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-6">
+                        <p>12.00%</p>
+                      </div>
+                      <div class="col-6">
+                         <p>1</p>
+                      </div>
+                      <div class="col-6">
+                        <p>Weekly Interest</p>
+                      </div>
+                      <div class="col-6">
+                         <p>Term Week</p>
+                      </div>
+                      
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                        <p>Min Deposit - <b>5,000.00 USD</b></p>
+                         <p>Max Deposit - 20,000.00 USD</p>
+                         <p>Term Duration - 1 week</p>
+                         <p>Payout Term - After maturity</p>
+                         <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="The invested amount will be returned at the end of term">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                      </svg>  - End of Term</p>
+                      <p>Total Return - 12%</p>  
+
+                      </div>
+                      
+                    </div>
+                  
+                    <div class="col-12">
+                      <a href="{% url 'signup' %}">
+                      <button type="button" class="btn btn-block btn-secondary mt-2">
+                        <b>Invest Now
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                      </a>
+                     </div>
+                  </div>
+                </div>
+
+                 <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                  <div class="vh-user-card t-bg-gradient-orange">
+                    <div class="row">
+                    <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+                      Silver Plan         
+                      </h3>
+                      </div>
+                    <div class="row t-text-white col-lg-12">
+                    <p style="font-size: 12px">
+                      Invest for long term &amp; earn more.
+                    </p>
+                    </div>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-6">
+                        <p>24.00%</p>
+                      </div>
+                      <div class="col-6">
+                         <p>1</p>
+                      </div>
+                      <div class="col-6">
+                        <p>Weekly Interest</p>
+                      </div>
+                      <div class="col-6">
+                         <p>Term Week</p>
+                      </div>
+                      
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                        <p>Min Deposit - <b>20,000.00 USD</b></p>
+                         <p>Max Deposit - 50,000.00 USD</p>
+                         <p>Term Duration - 1 week</p>
+                         <p>Payout Term - After maturity</p>
+                         <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="The invested amount will be returned at the end of term">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                      </svg>  - End of Term</p>
+                      <p>Total Return - 24%</p>  
+
+                      </div>
+                      
+                    </div>
+                  
+                    <div class="col-12">
+                      <a href="{% url 'signup' %}">
+                      <button type="button" class="btn btn-block btn-secondary mt-2">
+                        <b>Invest Now
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                      </a>
+                     </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                  <div class="vh-user-card t-bg-gradient-orange">
+                    <div class="row">
+                    <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+                      Retirement Plan      
+                      </h3>
+                      </div>
+                    <div class="row t-text-white col-lg-12">
+                    <p style="font-size: 12px">
+                      Invest for long term &amp; earn more.
+                    </p>
+                    </div>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-6">
+                        <p>120.00%</p>
+                      </div>
+                      <div class="col-6">
+                         <p>1</p>
+                      </div>
+                      <div class="col-6">
+                        <p>Monthly Interest</p>
+                      </div>
+                      <div class="col-6">
+                         <p>Term month</p>
+                      </div>
+                      
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-capitalize t-text-white">
+                      <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                        <p>Min Deposit - <b>50,000.00 USD</b></p>
+                         <p>Max Deposit - 5,000,000.00 USD</p>
+                         <p>Term Duration - 1 Month</p>
+                         <p>Payout Term - After maturity</p>
+                         <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="The invested amount will be returned at the end of term">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                      </svg>  - End of Term</p>
+                      <p>Total Return - 120%</p>  
+
+                      </div>
+                      
+                    </div>
+                  
+                    <div class="col-12">
+                      <a href="{% url 'signup' %}">
+                      <button type="button" class="btn btn-block btn-secondary mt-2">
+                        <b>Invest Now
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                          </svg>
+                        </b>
+                      </button>
+                      </a>
+                     </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Footer  -->
+    <footer class="vh-footer-primary">
+      <div class="vh-footer-primary__container t-pt-100">
+        <div class="vh-footer-primary__body">
+          <div class="container">
+            <div class="row g-3">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <h3 class="text-capitalize t-text-white vh-footer-primary__title">
+                  about Crestmetals
+                </h3>
+                <p class="vh-footer-primary__about t-text-white">
+                  From far back as 1982, Crestmetals has helped the general public diversify into precious metals. With more than 117, 940 active investors, Crestmetals has unparalleled expertise in research and development of the precious metals industry all over the world. We take pride in our service and our research team provides special reports and analysis. 
+                </p>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <h3 class="
+                        text-capitalize
+                        t-text-white
+                        vh-footer-primary__title
+                      ">
+                      useful link
+                    </h3>
+                    <ul class="list list--column vh-footer-list">
+                      <li class="vh-footer-list__item list--column__item">
+                        <a href="{% url 'no_auth_plans' %}" class="
+                            t-link
+                            vh-footer-list__link
+                            text-capitalize
+                            t-text-white
+                          ">
+                         Our Plans
+                        </a>
+                      </li>
+                      <li class="vh-footer-list__item list--column__item">
+                        <a href="{% url 'contact' %}" class="
+                            t-link
+                            vh-footer-list__link
+                            text-capitalize
+                            t-text-white
+                          ">
+                          contact us
+                        </a>
+                      </li>
+                      
+                      <li class="vh-footer-list__item list--column__item">
+                        <div style="display: inline; width: 200px; height: 40px;" id="translate-container">
+                              <div id="google_translate_element"></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <h3 class="
+                        text-capitalize
+                        t-text-white
+                        vh-footer-primary__title
+                      ">
+                      Support
+                    </h3>
+                    <ul class="list list--column">
+                      <li class="list--column__item">
+                        <div class="d-flex">
+                          <span class="
+                              d-inline-block
+                              t-fw-md
+                              text-capitalize
+                              t-text-white
+                              me-3
+                              flex-shrink-0
+                            ">
+                            phone :
+                          </span>
+                          <ul class="list list--column">
+                            <li class="list--column__item-sm t-text-white">
+                              706-457-8859
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="list--column__item">
+                        <div class="d-flex">
+                          <span class="
+                              d-inline-block
+                              t-fw-md
+                              text-capitalize
+                              t-text-white
+                              me-3
+                              flex-shrink-0
+                            ">
+                            email :
+                          </span>
+                          <ul class="list list--column">
+                            <li class="list--column__item-sm t-text-white">
+                              <a class="__cf_email__" data-cfemail="2d494840426d4a404c4441034e4240">support@crestmetals.pro</a>
+                            </li>
+                            <li class="list--column__item-sm t-text-white">
+                              <a class="__cf_email__" data-cfemail="a4ccddcdd4d0cbcae4c3c9c5cdc88acac1d0">press@crestmetals.pro</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                    <form action="#" class="vh-newsletter t-mt-30">
+                      <input type="text" class="vh-newsletter__input form-control" placeholder="email address">
+                      <button class="vh-newsletter__btn flex-shrink-0">
+                        <i class="bx bxs-paper-plane"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="vh-footer-primary__copyright">
+          <div class="container">
+            <div class="row g-3 justify-content-center">
+              <div class="col">
+                <p class="mb-0 t-text-white text-center text-capitalize">
+                  Copyright © 2024 All Rights Reserved
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Scripts  -->
+
+      <script>
+        // Adjust the size of the Google Translate widget container
+function resizeTranslateContainer(width, height) {
+  var translateContainer = document.getElementById('translate-container');
+  if (translateContainer) {
+    translateContainer.style.width = width + 'px';
+    translateContainer.style.height = height + 'px';
+  }
+}
+
+// Call the resize function with your desired width and height values
+resizeTranslateContainer(200, 40); // Adjust the width and height as desired
+    </script>
+
+    <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script><script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'js/slick.js' %}"></script>
+<script src="{% static 'js/odometer.js' %}"></script>
+<script src="{% static 'js/fun-fact-counter.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+  
+</div></body></html>

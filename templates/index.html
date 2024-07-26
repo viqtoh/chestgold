@@ -70,7 +70,7 @@ function getCookie(name) {
 <div class="container">
 <div class="row g-3 align-items-center">
 <div class="col-sm-12 col-lg-3">
-<center><a href="index.php.html">
+<center><a href="{% url 'index' %}">
 <b class="preloader__text text-capitalize" style="font-size: 25px; font-family: helvetica; color: #f4f4f4; text-shadow: 1px 1px 2px #f2f2f2f2; word-break: break-word; line-height: 25px;">Chestgold</b>
 </a></center>
 </div>
@@ -84,21 +84,21 @@ function getCookie(name) {
 <nav class="vh-nav">
 <ul class="list vh-primary-menu">
 <li class="vh-primary-menu__list">
-<a class="vh-primary-menu__link text-capitalize" href="index.php.html">
+<a class="vh-primary-menu__link text-capitalize" href="{% url 'index' %}">
                         home
                       </a>
 </li>
 <li class="vh-primary-menu__list">
-<a class="vh-primary-menu__link text-capitalize" href="plans.php.html">Our plans</a>
+<a class="vh-primary-menu__link text-capitalize" href="{% url 'no_auth_plans' %}">Our plans</a>
 </li>
 <li class="vh-primary-menu__list">
-<a class="vh-primary-menu__link text-capitalize" href="contact.php.html">support</a>
+<a class="vh-primary-menu__link text-capitalize" href="{% url 'contact' %}">support</a>
 </li>
 </ul>
 <div class="mx-3">
 <ul class="list vh-primary-menu vh-primary-menu--alt">
 <li class="vh-primary-menu__list text-center">
-<a class="btn button-outline button-outline--exception button-outline--gradient-orange text-uppercase w-100" href="signup.html">
+<a class="btn button-outline button-outline--exception button-outline--gradient-orange text-uppercase w-100" href="{% url 'signup' %}">
                           sign up
                         </a>
 </li>
@@ -126,7 +126,7 @@ function getCookie(name) {
 <p class="vh-hero__content-text">
                 It only get’s better. With Chestgold, you have the chance to invest directly into a reserve and earn a return on your investment while keeping your capital intact against inflation.
               </p>
-<a class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase" href="signup.html">
+<a class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase" href"{% url 'signup' %}">
                 get started
               </a>
 </div>
@@ -169,7 +169,7 @@ function getCookie(name) {
               You may be wondering how this works. Well, Chestgold is directly involved in the mining, drilling, and discovery of precious metals in proposed sites all around the world. When you invest with them, your funds are utilized for research, manual labor, and the purchase of machinery to enhance the development and discovery of these valuable resources. So, not only are you an investor, but you're also contributing to the production of precious metals. How amazing is that? 
             </p>
 <div class="text-center">
-<a class="btn button-solid btn-grad btn-grad--teal text-uppercase border-0" href="signup.html">
+<a class="btn button-solid btn-grad btn-grad--teal text-uppercase border-0" href="{% url 'signup' %}">
                 get started
               </a>
 </div>
@@ -288,12 +288,12 @@ function getCookie(name) {
                     </h3>
 <ul class="list list--column vh-footer-list">
 <li class="vh-footer-list__item list--column__item">
-<a class="t-link vh-footer-list__link text-capitalize t-text-white" href="plans.php.html">
+<a class="t-link vh-footer-list__link text-capitalize t-text-white" href="{% url 'no_auth_plans' %}">
                          Our Plans
                         </a>
 </li>
 <li class="vh-footer-list__item list--column__item">
-<a class="t-link vh-footer-list__link text-capitalize t-text-white" href="contact.php.html">
+<a class="t-link vh-footer-list__link text-capitalize t-text-white" href="{% url 'contact' %}">
                           contact us
                         </a>
 </li>

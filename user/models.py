@@ -27,6 +27,10 @@ class User(AbstractUser):
     dep_type = models.CharField(max_length=255, null=True, blank=True)
     usd = models.FloatField(null=True, blank=True)
     btc = models.FloatField(null=True, blank=True)
+    transactions = models.ManyToManyField("Transaction", blank=True)
+    email_confirmation_code = models.CharField(max_length=6, null=True, blank=True)
+    otpt = models.DateTimeField(default=timezone.now)
+    
     
 
 
@@ -60,6 +64,32 @@ class User(AbstractUser):
             self.gen_ref()
         return self.ref
     
+    def get_balance(self):
+        transactions = self.transactions.filter(status="completed")
+        return sum([t.amount for t in transactions if t.transaction_type == "deposit" or t.transaction_type == "unsubscribe"]) - sum([t.amount for t in transactions if t.transaction_type == "withdrawal" or t.transaction_type == "subscribe"])
+    
+    def get_total_deposit(self):
+        transactions = self.transactions.filter(status="completed")
+        return sum([t.amount for t in transactions if t.transaction_type == "deposit"])
+    
+    def get_total_deposit_this_month(self):
+        transactions = self.transactions.filter(status="completed", time__month=timezone.now().month)
+        return sum([t.amount for t in transactions if t.transaction_type == "deposit"])
+    
+    def get_total_withdrawal_this_month(self):
+        transactions = self.transactions.filter(status="completed", time__month=timezone.now().month)
+        return sum([t.amount for t in transactions if t.transaction_type == "withdrawal"])
+    
+    def get_total_withdrawal(self):
+        transactions = self.transactions.filter(status="completed")
+        return sum([t.amount for t in transactions if t.transaction_type == "withdrawal"])
+
+class Transaction(models.Model):
+    amount = models.FloatField(default=0)
+    time = models.DateTimeField(default=timezone.now)
+    transaction_type= models.CharField(choices=(("deposit", "Deposit"), ("withdrawal", "Withdrawal"),("subscribe","subscribe"),("unsubscribe","unsubscribe")), max_length=255)
+    status = models.CharField(choices=(("pending", "pending"), ("completed", "completed")), default="pending", max_length=255)
+
 
 class Address(models.Model):
     address = models.CharField(max_length=255)

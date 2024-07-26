@@ -118,11 +118,7 @@ function getCookie(name) {
   }
 </style>
 <div class="col-md-3 col-xxl-3">
-              <!-- <center>
-                <a href="index.php">
-                  <b class="preloader__text text-capitalize w-logo" style="font-size: 20px; font-family: helvetica; color: #f4f4f4; text-shadow: 1px 1px 2px #f2f2f2f2; word-break: break-word; line-height: 25px; padding-left: 15%; padding-right: 15%; padding-bottom: 20px; width: 100%;">Chestgold</b> 
-                </a>
-              </center> -->
+             
             <div class="vh-user-profile">
               <div class="vh-user-profile__info text-center mt-3 mb-4">
                 <h4 class="t-text-white text-capitalize">{{ user.get_name }}</h4>
@@ -148,8 +144,8 @@ function getCookie(name) {
 
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-parent="#accordionFlushExample">
                       <div class="accordion-body">
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px; color: #fd7e14">0.00 USD</h6>
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px">0.00 USDT</h6>
+                        <h6 class="t-text-white text-capitalize" style="font-size: 12px; color: #fd7e14">{{ balance|floatformat:2 }} USD</h6>
+                        <h6 class="t-text-white text-capitalize" style="font-size: 12px">{{ balance|floatformat:2 }} USDT</h6>
                         <div class="row t-text-white">
                           <div class="col-sm-6">
                             <p>profits (7d)</p>
@@ -164,12 +160,12 @@ function getCookie(name) {
                             <p>0.04 USD</p>
                           </div>
                           <div class="col-sm-6">
-                            <a href="deposit.php">
+                            <a href="{% url 'deposit' %}">
                               <button class="btn btn-block btn btn-secondary mt-2"><b>Deposit</b></button>
                             </a>
                           </div>
                           <div class="col-sm-6">
-                            <a href="withdraw.php">
+                            <a href="{% url 'insufficient' %}">
                               <button class="btn btn-block btn btn-warning mt-2"><b>Withdraw</b></button>
                             </a>
                           </div>

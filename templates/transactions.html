@@ -57,7 +57,7 @@
                       text-capitalize
                       lg-text
                       p-3
-                      t-fw-md
+                      t-fw-md text-center
                     ">
                     Amount
                   </th>
@@ -66,7 +66,7 @@
                       text-capitalize
                       lg-text
                       p-3
-                      t-fw-md
+                      t-fw-md text-center
                     ">
                     Status
                   </th>
@@ -75,7 +75,7 @@
                       text-capitalize
                       lg-text
                       p-3
-                      t-fw-md
+                      t-fw-md text-center
                     ">
                     Transaction type
                   </th>
@@ -84,25 +84,26 @@
                       text-capitalize
                       lg-text
                       p-3
-                      t-fw-md
+                      t-fw-md text-center
                     ">
                     date
                   </th>
                 </tr>
               </thead>
               <tbody>
-               
+                {% if not transactions.count %}
                 <tr>
-                  <td class="t-text-white">$1,000.00</td><td class="t-text-white">Pending</td>
-                  <td class="t-text-white">Deposit</td>
-                  <td class="t-text-white">07/20/2024 05:37:42 am</td>
+                  <td colspan="4" class="text-center">No transactions found</td>
                 </tr>
-                 
+                {% endif %}
+               {% for t in transactions %}
                 <tr>
-                  <td class="t-text-white">$1,000.00</td><td class="t-text-white">Pending</td>
-                  <td class="t-text-white">Deposit</td>
-                  <td class="t-text-white">07/20/2024 05:38:51 am</td>
+                  <td class="t-text-white text-center">${{ t.amount }}</td><td class="t-text-white text-capitalize text-center">{{ t.status }}</td>
+                  <td class="t-text-white text-capitalize text-center">{{ t.transaction_type }}</td>
+                  <td class="t-text-white text-center">{{ t.time }}</td>
                 </tr>
+                 {% endfor %}
+                
                                       </tbody>
             </table>
           </div>
