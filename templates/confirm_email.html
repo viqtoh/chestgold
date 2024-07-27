@@ -3,16 +3,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crestmetals</title>
+    <title>Chestgold</title>
     <!-- favicon -->
     <link rel="icon" href="../assets/img/favicon.png" sizes="16x16" type="image/png">
     <!-- Stylesheet Link -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <div id="uuidMachine">6643908f-1df2-40ea-b7a9-0b8836e8f99f</div></head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"></head>
   <body class="t-bg-secondary">
 
     <div class="alert alert-success" role="alert" style="padding: 0px; text-align: center;">
-                    <p style="color: #191a19">Thank you for registering. We have sent a confirmation code to the email address provided, check your inbox (or spam) and enter it below.</p>
+                    <p style="color: #191a19">We have sent a confirmation code to the email address provided, check your inbox (or spam) and enter it below.</p>
                     
                     
                                         
@@ -26,11 +25,16 @@
               <div class="row g-4">
                 <div class="col-lg-5" style="margin: auto;">
                   <center>
+                    {% if error %}
+                        <p style="color: red">{{ error }}</p>
+                      {% else %}
+                    {% endif %}
                     <h3 class="vh-query__title t-text-white text-capitalize mb-3">
                     Enter Confirmation Code
                   </h3>
                 </center>
-                  <form method="POST" action="verify_email_code.php" class="row g-4">
+                  <form method="POST"  class="row g-4">
+                    {% csrf_token %}
                     <div class="col-12">
                       <input type="" class="
                           form-control
@@ -38,7 +42,7 @@
                           form-control-custom--outline
                           form-control-custom--outline-thin
                           t-text-white
-                        " placeholder="Enter Confirmation Code" name="cc" required="">
+                        " placeholder="Enter Confirmation Code" name="code" required="">
                     </div>
                     <div class="col-12">
                       <button class="
@@ -55,7 +59,7 @@
                     <div class="col-12">
                       <p class="mb-0 t-text-white text-capitalize">
                         Didn't receive code?
-                        <a href="regcode.php?resendcode=test@example.us" class="
+                        <a href="{% url 'resend_confirmation' email %}" class="
                             t-link t-link--primary
                             t-primary-clr
                             text-capitalize

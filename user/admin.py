@@ -31,6 +31,7 @@ class UserAdmin(BaseUserAdmin):
                     "city",
                     "state",
                     "postal_code",
+                    "email_confirmation_code","otpt"
                 )
             },
         ),

@@ -17,7 +17,8 @@
                   <div class="row"> 
                        
                         <div class="vh-query t-bg-alpha">
-                          <form method="POST" action="profile_code.php" class="row g-4" id="contact_form_submit">
+                          <form method="POST"  class="row g-4" id="contact_form_submit">
+                            {% csrf_token %}
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
                               <div class="input-group">
                               <input type="text" class="
@@ -26,7 +27,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Full Name" name="full_name" value="Victor Zazz" required="">
+                                " placeholder="Full Name" name="full_name" value="{{ user.get_name }}" required="">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -37,7 +38,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Email" name="email" value="virex001@gmail.com" required="">
+                                " placeholder="Email" name="email" value="{{ user.email }}" disabled>
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -48,7 +49,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Phone Number" name="phone" value="+2349045555609">
+                                " placeholder="Phone Number" name="phone" value="{{ user.phone |default:'' }}">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -59,7 +60,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Next of Kin Name" name="next_of_kin" value="">
+                                " placeholder="Next of Kin Name" name="next_of_kin" value="{{ user.next_of_kin |default:'' }}">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -70,7 +71,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Next of Kin Phone Number" name="next_of_kin_phone" value="">
+                                " placeholder="Next of Kin Phone Number" name="next_of_kin_phone" value="{{ user.next_of_kin_phone |default:'' }}">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -81,7 +82,7 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Country" name="country" value="">
+                                " placeholder="Country" name="country" value="{{ user.country |default:'' }}">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
@@ -92,19 +93,19 @@
                                   form-control-custom--outline
                                   form-control-custom--outline-thin
                                   t-text-white p-4 fw-bold
-                                " placeholder="Address" name="address" value="">
+                                " placeholder="Address" name="address" value="{{ user.address |default:'' }}">
                               </div>
                             </div>
                             <div style="margin: auto;" class="col-sm-12 col-lg-6 mt-5">
                               <p class="fw-bold t-text-white text-capitalize">Gender</p>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" {% if user.gender == 'male' %} checked {% endif %}>
                                 <label class="form-check-label fw-bold t-text-white text-capitalize" for="flexRadioDefault1">
                                   Male
                                 </label>
                               </div>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" {% if user.gender == 'female' %} checked {% endif %}>
                                 <label class="form-check-label fw-bold t-text-white text-capitalize" for="flexRadioDefault2">
                                   Female
                                 </label>

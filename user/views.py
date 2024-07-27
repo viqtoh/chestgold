@@ -40,8 +40,12 @@ def login(request):
         context['next'] = next_url
         if user:
             if user.check_password(password):
-                auth.login(request, user)
-                return HttpResponseRedirect(next_url)
+                if user.is_active:
+                    auth.login(request, user)
+                    return HttpResponseRedirect(next_url)
+                else:
+                    url = reverse("resend_confirmation", args=[email])
+                    return redirect(url)
             else:
                 context["error"] = "Incorrect Email or Password."
         else:
@@ -63,7 +67,7 @@ def signup(request):
         user = User.objects.filter(email=email).first()
         if(user):
             return render(request, 'signup.html', {"error": "Email already exists"})
-        nwuser = User(email=email, first_name=first_name, last_name=last_name, is_active=False, phone_number=phone)
+        nwuser = User(email=email, first_name=first_name, last_name=last_name, is_active=False, phone=phone)
         nwuser.save()
         nwuser.set_password(password)
         random_numbers = [random.randint(0, 9) for _ in range(6)]
@@ -71,10 +75,10 @@ def signup(request):
         nwuser.email_confirmation_code= otp
         nwuser.otpt=timezone.now()
         nwuser.save()
-        html_message = render_to_string('confirm_template.html', {'otp':otp, "name": nwuser.get_name() })
-        plain_message = strip_tags(html_message)
-        mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
         url = reverse("confirm_email", args=[email])
+        html_message = render_to_string('confirm_template.html', {'otp':otp, "name": nwuser.get_name(), "domain": request.get_host(),"url":url })
+        plain_message = strip_tags(html_message)
+        mail.send_mail('Verify Email Address', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
         return redirect(url)
     return render(request, 'signup.html', context)
 
@@ -89,10 +93,10 @@ def resend_confirmation(request,email):
     user.email_confirmation_code= otp
     user.otpt=timezone.now()
     user.save()
-    html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name() })
-    plain_message = strip_tags(html_message)
-    mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
     url = reverse("confirm_email", args=[email])
+    html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name(), "domain": request.get_host(),"url":url })
+    plain_message = strip_tags(html_message)
+    mail.send_mail('Verify Email Address', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
     return redirect(url)
 
 
@@ -118,20 +122,23 @@ def forgot_password(request):
 
 
 def confirm_email(request,email):
-    context = {}
+    context = {"email":email}
     if request.method == "POST":
         code = request.POST.get("code")
         user = User.objects.filter(email=email).first()
         if(user):
-            time_difference = abs(user.otpt - timezone.now())
-            if time_difference > timedelta(minutes=15):
-                return {"ok": False, "message":"otp expired"}
             if(user.email_confirmation_code == code):
+                time_difference = abs(user.otpt - timezone.now())
+                if time_difference > timedelta(minutes=15):
+                    context["error"] = "Code Expired"
+                    return render(request, "confirm_email.html", context)
                 user.is_active = True
                 user.save()
                 return redirect("login")
+            else:
+                context["error"] = "Invalid Code"
         else:
-            context["error"] = "Invalid Code"
+            return redirect("signup")
     return render(request, 'confirm_email.html', context)
 
 @login_required
@@ -187,6 +194,28 @@ def plans(request):
 @login_required
 def profile(request):
     user = request.user
+    if request.method == "POST":
+        password = request.POST.get("password")
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        next_of_kin= request.POST.get("next_of_kin")
+        next_of_kin_phone= request.POST.get("next_of_kin_phone")
+        country = request.POST.get("country")
+        address = request.POST.get("address")
+        gender = request.POST.get("gender")
+        if full_name:
+            parts = full_name.split(' ', 1)
+            first_name = parts[0]
+            last_name = parts[1] if len(parts) > 1 else ''
+        user.first_name = first_name
+        user.last_name = last_name
+        user.phone = phone
+        user.next_of_kin = next_of_kin
+        user.next_of_kin_phone = next_of_kin_phone
+        user.country = country
+        user.address = address
+        user.gender = gender
+        user.save()
     context ={
         "user": user,
         "balance": user.get_balance(),
