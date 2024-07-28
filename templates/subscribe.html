@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Transactions{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="row vh-user-panel t-bg-alpha">
+        <div class="list--row__item d-lg-inline-block my-2 col-lg-7 col-sm-12">
+          <a href="{% url 'plans' %}" style="text-decoration-line:none;"><p class="t-text-white text-capitalize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+              <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"></path>
+            </svg>
+            History
+          </p></a>
+          <h4 class="vh-user-panel__title t-text-white text-capitalize">
+            Invest now
+          </h4>
+          <p class="t-text-white text-capitalize">
+          </p>
+        </div>
+        <div class="col-lg-4 col-sm-12 pt-5">
+          <a href="{% url 'plans' %}">
+          <button type="submit" class="btn btn--lg button-solid btn-grad btn-grad--orange text-uppercase btn--sqr w-100 p-2 fw-bold" style="color: #fff" name="transfer_funds">Invest &amp; Earn
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"></path>
+          </svg>
+          </button>
+          </a>
+        </div>
+    </div>
+        <div class="mt-5">
+        <div class="row g-3 g-xl-4">
+            <div class="col-12">
+              <div class="vh-auth">
+                <div class="row g-4">
+                  <div class="col-lg-12" style="margin: auto;">
+                       
+                      <div class="row"> 
+                           
+                            <div class="vh-query t-bg-alpha">
+                                <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                                    <div class="vh-user-card t-bg-gradient-orange">
+                                      <div class="row">
+                                      <h3 class="mb-0 fw-bold text-capitalize t-text-white xl-text col-lg-10">
+                                        {{ investment.name }} Plan         
+                                        </h3>
+                                        </div>
+                                      <div class="row t-text-white col-lg-12">
+                                      <p style="font-size: 12px">
+                                        Invest for long term &amp; earn more.
+                                      </p>
+                                      </div>
+                          
+                                      <div class="row text-capitalize t-text-white">
+                                        <div class="col-6">
+                                          <p>{{ investment.interest|floatformat:2 }}%</p>
+                                        </div>
+                                        <div class="col-6">
+                                           <p>{{ investment.duration }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                          <p>{% if investment.duration_type == "weeks" %}Weekly{% else %}Monthly{% endif %} Interest</p>
+                                        </div>
+                                        <div class="col-6">
+                                           <p>Term {% if investment.duration_type == "weeks" %}{% if investment.duration > 1 %}weeks{% else %}week{% endif %}{% else %}{% if investment.duration > 1 %}months{% else %}month{% endif %}{% endif %}</p>
+                                        </div>
+                                        
+                                      </div>
+                          
+                                      <hr>
+                          
+                                      <div class="row text-capitalize t-text-white">
+                                        <div class="col-12" style="line-height: 1.5px; text-align: left;">
+                                          <p>Min Deposit - <b>{{ investment.min_deposit|floatformat:2 }} USD</b></p>
+                                           <p>Max Deposit - {{ investment.max_deposit|floatformat:2 }} USD</p>
+                                           <p>Term Duration - {{ investment.duration }} {% if investment.duration_type == "weeks" %}{% if investment.duration > 1 %}weeks{% else %}week{% endif %}{% else %}{% if investment.duration > 1 %}months{% else %}month{% endif %}{% endif %}</p>
+                                           <p>Payout Term - After maturity</p>
+                                           <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">
+                                          <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                        </svg>  - End of Term</p>
+                                        <p>Total Return - {{ investment.interest }}%</p>  
+                          
+                                        </div>
+                                        
+                                      </div>
+                                    
+                                      
+                          
+                                    </div>
+                                  </div>
+                              <form method="POST"  class="row g-4 ">
+                                {% csrf_token %}
+                                  
+                                <div style="margin: auto;" class="row col-sm-12 col-lg-12 mt-5 my-5">
+                                  <div class=" col-lg-6 px-0">
+                                    <div style="height: 30px;"><span style="font-size:15px; color: red">{{ error }} </span></div>
+                                  <input type="number" class="
+                                      form-control
+                                      form-control-custom
+                                      form-control-custom--outline
+                                      form-control-custom--outline-thin
+                                      t-text-white p-4 fw-bold
+                                    " placeholder="Amount" name="amount" value="" min="{{ investment.min_deposit }}" max="{{ investment.max_deposit}}" required="">
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <button type="submit" name="profile" class="
+                                        btn btn--lg
+                                        button-solid
+                                        btn-grad btn-grad--orange
+                                        text-uppercase
+                                        btn--sqr
+                                        w-100 p-2 fw-bold
+                                      " style="color: #fff; margin-top:30px;  height:50px;">
+                                      Subscribe
+                                    </button>
+                                  </div>
+                                </div>
+                                
+                                
+                              </form>
+                            </div>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+{% endblock content %}

@@ -17,10 +17,19 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (
-            _("Personal info"),
+            _("Transactions"),
             {
                 "fields": (
                     "transactions",
+                    "plans",
+                    
+                )
+            },
+        ),
+        (
+            _("Personal info"),
+            {
+                "fields": (
                     "first_name",
                     "last_name",
                     "date_of_birth",
@@ -28,9 +37,6 @@ class UserAdmin(BaseUserAdmin):
                     "profile_pic",
                     "phone",
                     "address",
-                    "city",
-                    "state",
-                    "postal_code",
                     "email_confirmation_code","otpt"
                 )
             },
@@ -62,5 +68,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 
-
-admin.site.register(Address)
+admin.site.register(InvestmentPlan)
+admin.site.register(Plan)
+admin.site.register(TransactionDetail)
+admin.site.register(SiteSetting)

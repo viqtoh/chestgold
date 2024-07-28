@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from. models import User, Address
+from. models import User, TransactionDetail,InvestmentPlan, Plan, Transaction, SiteSetting
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -17,13 +17,20 @@ from django.conf import settings
 
 
 def index(request):
-    return render(request, "index.html")
+    setting = SiteSetting.objects.all().first()
+    context = {"setting": setting}
+    return render(request, "index.html",context)
 
 def no_auth_plans(request):
-    return render(request, "no_auth_plan.html")
+    plans = InvestmentPlan.objects.filter()
+    setting = SiteSetting.objects.all().first()
+    context = {"setting": setting, "plans": plans}
+    return render(request, "no_auth_plan.html", context)
 
 def contact(request):
-    return render(request, "contact.html")
+    setting = SiteSetting.objects.all().first()
+    context = {"setting": setting}
+    return render(request, "contact.html", context)
 
 
 
@@ -162,7 +169,7 @@ def dashboard(request):
 @login_required
 def transactions(request):
     user = request.user
-    transactions = user.transactions.all()
+    transactions = user.transactions.all().order_by("-id")
 
     context ={
         "user": user,
@@ -178,6 +185,19 @@ def investments(request):
         "user": user,
         "balance": user.get_balance(),
     }
+    if(request.method == "POST"):
+        amount = request.POST.get("amount")
+        amount = float(amount)
+        print(user.get_free_investments)
+        if(amount > user.get_free_investments):
+            context["error"]="You dont have enough available balance in your investment account"
+            context["amount"] = amount
+        else:
+            trf = Transaction(amount=amount, transaction_type="unsubscribe", status="completed")
+            trf.save()
+            user.transactions.add(trf)
+            user.save()
+            return redirect("dashboard")
     return render(request, "investments.html", context)
 
 @login_required
@@ -185,9 +205,11 @@ def plans(request):
     user = request.user
     if(request.method == "POST"):
         return redirect("subscribe")
+    plans= InvestmentPlan.objects.all()
     context ={
         "user": user,
         "balance": user.get_balance(),
+        "plans":plans
     }
     return render(request, "plans.html", context)
 
@@ -226,13 +248,27 @@ def profile(request):
 @login_required
 def change_password(request):
     user = request.user
-    context ={
-        "user": user,
-        "balance": user.get_balance(),
-    }
-    return render(request, "change_password.html", context)
+    context = {
+            'user': user,
+            'balance': user.get_balance(),
+        }
+    if request.method == 'POST':
+        old_password = request.POST.get("oldpassword")
+        new_password = request.POST.get("newpassword")
+        new_password_confirm = request.POST.get("passwordconfirm")
+        print(new_password)
+        print(new_password_confirm)
 
-
+        if not user.check_password(old_password):
+            context["error"] ='The old password you entered is incorrect.'
+        elif new_password != new_password_confirm:
+            context["error"] ='The new passwords do not match.'
+        else:
+            user.set_password(new_password)
+            user.save()
+            auth.logout(request)
+            return redirect('login')
+    return render(request, 'change_password.html', context)
 @login_required
 def subscribe(request):
     user = request.user
@@ -282,7 +318,10 @@ def deposit_amount(request):
         user.usd = float(request.POST.get("usd_amount"))
         btc = request.POST.get("btc_amount")
         btc=btc.split(" BTC")[0]
-        user.btc = float(btc)
+        try:
+            user.btc = float(btc)
+        except ValueError:
+            pass
         user.save()
         if(user.dep_type == "btc"):
             return redirect("pay_btc")
@@ -296,9 +335,31 @@ def deposit_amount(request):
     return render(request, "deposit_amount.html", context)
 
 @login_required
+def withdraw(request):
+    return redirect("insufficient")
+
+def pay_other(request):
+    user = request.user
+    trans = Transaction(amount= user.usd, transaction_type="deposit", status="pending", transaction_medium=user.dep_type)
+    trans.save()
+    user.transactions.add(trans)
+    user.usd =0
+    user.btc =0
+    user.dep_type = ""
+    user.save()
+    context ={
+        "user": user,
+        "deposit_type": user.dep_type,
+        "balance": user.get_balance(),
+    }
+    return render(request, "deposit_other.html", context)
+
+
+
+@login_required
 def pay_btc(request):
     user = request.user
-    address = Address.objects.filter(active=True).first()
+    address = TransactionDetail.objects.filter(active=True).first()
     if(not address):
         return render(request, "bitcoin.html", {"err":"this method is currently unavailable"})
     context ={
@@ -311,16 +372,52 @@ def pay_btc(request):
     return render(request, "bitcoin.html", context)
 
 @login_required
-def pay_other(request):
+def create_trans(request):
     user = request.user
-    context ={
-        "user": user,
-        "deposit_type": user.dep_type,
-        "balance": user.get_balance(),
-    }
-    return render(request, "deposit_other.html", context)
+    trans = Transaction(amount= user.usd, transaction_type="deposit", status="pending", transaction_medium=user.dep_type)
+    trans.save()
+    user.transactions.add(trans)
+    user.usd =0
+    user.btc =0
+    user.dep_type = ""
+    user.save()
+    return redirect("transactions")
+
+
 
 @login_required
 def signout(request):
     auth.logout(request)
     return redirect("index")
+
+
+
+@login_required
+def subscribe_plan(request, pid):
+    user = request.user
+    investment = InvestmentPlan.objects.get(id=pid)
+    context = {
+        "user": user,
+        "investment": investment,
+    }
+    if(request.method =="POST"):
+        amount = request.POST.get("amount")
+        amount = float(amount)
+        if (amount> user.get_balance()):
+            context["error"] = "Insufficient balance"
+            return render(request, "subscribe.html", context)
+        duration_type = investment.duration_type
+        if(duration_type == "months"):
+            release_date = timezone.now() + timedelta(days=30 * investment.duration)
+        elif(duration_type == "weeks"):
+            release_date = timezone.now() + timedelta(days=7 * investment.duration)
+        trf = Transaction(amount=amount, transaction_type="subscribe", status="completed")
+        trf.save()
+        user.transactions.add(trf)
+        user.save()
+        plan =Plan(amount=amount, investment_plan=investment, interest=investment.interest, release_date=release_date)
+        plan.save()
+        user.plans.add(plan)
+        user.save()
+        return redirect("dashboard")
+    return render(request, "subscribe.html", context)

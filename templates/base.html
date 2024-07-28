@@ -29,7 +29,7 @@
       </style>
 
       <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function changeLanguage(lang) {
   // Set the language cookie with an expiration date
@@ -151,21 +151,16 @@ function getCookie(name) {
                             <p>profits (7d)</p>
                           </div>
                           <div class="col-sm-6">
-                            <p>0.00 USD</p>
+                            <p>{{ user.get_profit_7 |floatformat:2 }} USD</p>
                           </div>
-                          <div class="col-sm-6">
-                            <p>Deposit in orders</p>
-                          </div>
-                          <div class="col-sm-6">
-                            <p>0.04 USD</p>
-                          </div>
+                          
                           <div class="col-sm-6">
                             <a href="{% url 'deposit' %}">
                               <button class="btn btn-block btn btn-secondary mt-2"><b>Deposit</b></button>
                             </a>
                           </div>
                           <div class="col-sm-6">
-                            <a href="{% url 'insufficient' %}">
+                            <a href="{% url 'withdraw' %}">
                               <button class="btn btn-block btn btn-warning mt-2"><b>Withdraw</b></button>
                             </a>
                           </div>
@@ -312,7 +307,7 @@ function getCookie(name) {
       </script>
   
    <!-- for dropdown options carrying profile, account, logout -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <script>
     $(document).ready(function() {
       $('#dropdown-menu').change(function() {

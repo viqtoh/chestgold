@@ -174,7 +174,7 @@ function getCookie(name) {
                       ">Call for expert advice</span>
                     <p class="vh-article__text t-text-white">
                       Talk to a representative, call
-						(706) 457-8859
+                      {{ setting.expert_phone |default:"" }}
                     </p>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ function getCookie(name) {
                     <ul class="list list--column">
                       <li class="list--column__item-sm t-text-white">
                         <a>Have all your questions and concerns answered by our US-based associated at
-						(706) 457-8859
+                          {{ setting.concierge_phone |default:"" }}
 						</a>
                       </li>
                     </ul>
@@ -215,7 +215,7 @@ function getCookie(name) {
                       ">Media inquiry</span>
                     <ul class="list list--column">
                       <li class="list--column__item-sm t-text-white">
-                        support@crestmetals.pro
+                        {{ setting.support_email |default:"" }}
                       </li>
                     </ul>
                   </div>
@@ -488,7 +488,7 @@ A rollover is when you take receipt of your funds and have up to 60 days to rein
                           </span>
                           <ul class="list list--column">
                             <li class="list--column__item-sm t-text-white">
-                              706-457-8859
+                              {{ setting.support_phone |default:"" }}
                             </li>
                           </ul>
                         </div>
@@ -507,7 +507,7 @@ A rollover is when you take receipt of your funds and have up to 60 days to rein
                           </span>
                           <ul class="list list--column">
                             <li class="list--column__item-sm t-text-white">
-                              <a class="__cf_email__" data-cfemail="2d494840426d4a404c4441034e4240">support@crestmetals.pro</a>
+                              <a class="__cf_email__" data-cfemail="2d494840426d4a404c4441034e4240">{{ setting.support_email |default:"" }}</a>
                             </li>
                           </ul>
                         </div>

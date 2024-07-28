@@ -42,8 +42,8 @@
                       </div>
                       {% endif %}
                       <div class="col-lg-6 pt-5" style="margin:auto;">
-                        <form method="POST" action="btc_pay_code.php">
-                              <button type="submit" class="
+                        
+                              <button type="submit" id="confirm_btn" class="
                                   btn btn--lg
                                   button-solid
                                   btn-grad btn-grad--orange
@@ -53,7 +53,6 @@
                                 " style="color: #fff" name="confirm_deposit">
                                 Confirm Deposit
                               </button>
-                          </form>
                             </div>  
                     </div>
                   </div>
@@ -71,4 +70,14 @@
             </div>
           </div>
         </div>
+
+
+
+
+        <script>
+          document.getElementById("confirm_btn").addEventListener("click", function() {
+            alert("Thanks for depositing. Please wait for confirmation");
+            window.location.href = "{% url 'create_trans' %}";
+          });
+        </script>
 {% endblock %}

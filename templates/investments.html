@@ -53,7 +53,7 @@
               </p>
               </div>
             <h6 class="t-text-white fw-bold text-uppercase">
-              0.00 usd
+              {{ user.get_free_investments |floatformat:2 }} usd
             </h6>
 
             <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
@@ -63,11 +63,11 @@
             </div>
           
             <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
-              0.00
+              {{ user.get_unfree_investments |floatformat:2 }}
             </h3>
             <p class="fw-bold text-capitalize t-text-white col-lg-10">Locked</p>
             <div class="col-sm-12 col-lg-10">
-              <button type="button" class="btn btn-block btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+              <button type="button" id="transferbtn" class="btn btn-block btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                 <b>Transfer Funds
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
@@ -84,10 +84,11 @@
                         <h5 class="modal-title" id="exampleModalLongTitle">Enter amount you would like to send</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <form method="POST" action="transfer_funds_code.php">
+                      <form method="POST">
+                      {% csrf_token %}
                         <div class="modal-body">
                           <div class="input-group">
-                        <input type="number" class="
+                        <input type="number" id="amountfield" class="
                             form-control
                             form-control-custom
                             form-control-custom--outline
@@ -104,6 +105,7 @@
                         </div>
                         </div>
                         <div class="modal-footer">
+                          <span style="font-size: 15px; color: red;">{{ error }}</span>
                           <button type="submit" class="
                             btn btn--lg
                             button-solid
@@ -133,7 +135,7 @@
               </p>
               </div>
             <h6 class="t-text-white fw-bold text-uppercase">
-              0.00 usd
+              {{ user.get_unfree_investments_principal |floatformat:2 }} usd
             </h6>
 
             <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
@@ -143,7 +145,7 @@
             </div>
           
             <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
-              0.00 usd
+              {{ user.get_unfree_investments_profit |floatformat:2 }} usd
             </h3>
 
             <p class="fw-bold text-capitalize t-text-white col-lg-10">Approx profit</p>
@@ -153,7 +155,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
               </svg>
-              <a href="investment_transaction_history.php" class="btn-grad--orange t-text-white" style="padding: 6px">Transaction history</a>
+              <a href="{% url 'transactions' %}" class="btn-grad--orange t-text-white" style="padding: 6px">Transaction history</a>
               </div>
 
           </div>
@@ -162,4 +164,17 @@
        
       </div>
     </div>
+
+    {% autoescape off %}
+    <script>
+      if("{{ amount }}"){
+        document.getElementById("amountfield").value = "{{ amount }}";
+        document.getElementById("amountfield").focus();
+        $(document).ready(function() {
+          $('#exampleModalCenter').modal('show');
+        });
+      }
+      
+    </script>
+    {% endautoescape %}
 {% endblock content %}

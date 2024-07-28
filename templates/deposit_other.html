@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pay BTC{% endblock title %}
+
+{% block content %}
+<div class="col-md-9 col-xxl-9">
+    <div class="mt-5">
+    <div class="row g-3 g-xl-4">
+        <div class="col-12">
+          <div class="vh-auth">
+            <div class="row g-4">
+              <div class="col-lg-12" style="margin: auto;">
+                    
+                    
+                    {% if not err %}
+                  <div class="row">  
+                  <div class="col-sm-10 col-lg-8" style="margin: auto;">
+                    <p style="font-size: 18px; color:white; margin-top: 50px;">Thanks for depositing. An email with the details will be sent to {{ user.email }}. Please follow the instructions to finalize your deposit</p>
+                      
+                      <div class="col-lg-6 pt-5" style="margin:auto;">
+                        
+                              <a href="{% url 'transactions' %}"><button type="submit" id="confirm_btn" class="
+                                  btn btn--lg
+                                  button-solid
+                                  btn-grad btn-grad--orange
+                                  text-uppercase
+                                  btn--sqr
+                                  w-100 p-2 fw-bold
+                                " style="color: #fff" name="confirm_deposit">
+                                Transactions
+                              </button>
+                            </a>
+                            </div>  
+                    </div>
+                  </div>
+
+                  {% else %}
+                  <div class="row">  
+                    <div class="col-sm-10 col-lg-8" style="margin: auto;">
+                        <p class="text-danger mt-5 text-center text-capitalize" style="font-size: 18px;">{{ err }}</p>
+                    </div>
+                  </div>
+
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+       
+{% endblock %}

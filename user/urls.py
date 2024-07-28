@@ -26,5 +26,8 @@ urlpatterns = [
     path("resend/confirmation/<str:email>", resend_confirmation, name="resend_confirmation"),
     path("confirm/email/<str:email>", confirm_email, name="confirm_email"),
     path("plans",no_auth_plans, name="no_auth_plans"),
-    path("contact", contact, name="contact")
+    path("contact", contact, name="contact"),
+    path("withdraw", withdraw, name="withdraw"),
+    path("plans/subscribe/<str:pid>", subscribe_plan, name="subscribe_plan"),
+    path("dasboard/deposit/confirm/deposit", create_trans, name="create_trans"),
 ]

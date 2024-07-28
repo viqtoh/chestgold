@@ -316,7 +316,7 @@ function getCookie(name) {
                           </span>
 <ul class="list list--column">
 <li class="list--column__item-sm t-text-white">
-                              706-457-8859
+  {{ setting.support_phone |default:"" }}
                             </li>
 </ul>
 </div>
@@ -328,11 +328,9 @@ function getCookie(name) {
                           </span>
 <ul class="list list--column">
 <li class="list--column__item-sm t-text-white">
-<a class="__cf_email__" data-cfemail="2d494840426d4a404c4441034e4240">support@Chestgold.pro</a>
+<a class="__cf_email__" data-cfemail="2d494840426d4a404c4441034e4240">{{ setting.support_email }}</a>
 </li>
-<li class="list--column__item-sm t-text-white">
-<a class="__cf_email__" data-cfemail="a4ccddcdd4d0cbcae4c3c9c5cdc88acac1d0">press@Chestgold.pro</a>
-</li>
+
 </ul>
 </div>
 </li>
