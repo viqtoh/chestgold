@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-m#zqlpb5v&&*oiy(p_^8(i7(+*0ik71)#-x(p)=x4k8l+wz+%_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['chestgold.net']
 
 
 # Application definition
@@ -133,6 +133,7 @@ DEFAULT_FROM_EMAIL = 'postmaster@sandbox01b89ed31a7149c2a4ddd6e9ff55831e.mailgun
 STATIC_URL = "/static/"
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
+STATIC_ROOT = "/staticfiles"
 # Added manually
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
