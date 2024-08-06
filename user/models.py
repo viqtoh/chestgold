@@ -8,6 +8,7 @@ import random, string
 from datetime import datetime, date, time, timedelta
 from django.core import mail
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.html import strip_tags
 
 class User(AbstractUser):
@@ -34,6 +35,8 @@ class User(AbstractUser):
     email_confirmation_code = models.CharField(max_length=6, null=True, blank=True)
     otpt = models.DateTimeField(default=timezone.now)
     plans = models.ManyToManyField("Plan", blank=True)
+    forgot_password_code = models.CharField(max_length=60, null=True, blank=True)
+    forgot_password_expiry = models.DateTimeField(null=True, blank=True)
     
     
 
@@ -218,9 +221,13 @@ class Transaction(models.Model):
 
     def __str__(self):
         user = User.objects.filter(transactions__in=[self]).first()
+        if(user):
+            name = user.get_name()
+        else:
+            name = "No User"
         if self.transaction_type == "deposit":
-            return f"{self.transaction_type.capitalize()} via {self.transaction_medium} by {user.get_name()} - Amount: {self.amount}"
-        return f"{self.transaction_type.capitalize()} by {user.get_name()} - Amount: {self.amount}"
+            return f"{self.transaction_type.capitalize()} via {self.transaction_medium} by {name} - Amount: {self.amount}"
+        return f"{self.transaction_type.capitalize()} by {name} - Amount: {self.amount}"
     
     def save(self, *args, **kwargs):
         domain = SiteSetting.objects.first().domain
@@ -228,8 +235,9 @@ class Transaction(models.Model):
             user = User.objects.filter(transactions__in=[self]).first()
             original = Transaction.objects.get(pk=self.pk)
             if original.email_status == "not sent" and self.email_status == "sent" and self.transaction_type == "deposit" and self.transaction_medium != 'btc':
-                details = TransactionDetail.objects.filter(active=True).first()
-                html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": self.transaction_medium, "amount": self.amount})
+                detail = TransactionDetail.objects.filter(active=True).first()
+                url  = domain+reverse("transactions")
+                html_message = render_to_string('deposit_template.html', {'detail':detail, "name": user.get_name(), "domain": domain, "type": self.transaction_medium, "amount": self.amount,"url":url})
                 plain_message = strip_tags(html_message)
                 mail.send_mail('Deposit Notification', plain_message, settings.EMAIL_HOST_USER, [user.email], html_message=html_message)
 

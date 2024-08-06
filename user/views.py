@@ -11,7 +11,8 @@ from django.utils.html import strip_tags
 from django.core import mail
 from datetime import datetime, timedelta, date
 from django.conf import settings
-
+import string
+import secrets
 
 # Create your views here.
 
@@ -106,27 +107,61 @@ def resend_confirmation(request,email):
     mail.send_mail('Your Confirmation Code', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
     return redirect(url)
 
+def generate_token(length=32):
+    # Define the characters to use in the token
+    characters = string.ascii_letters + string.digits
+    
+    # Generate a random token
+    token = ''.join(secrets.choice(characters) for _ in range(length))
+    
+    return token
 
 
+# Forgot password view
 def forgot_password(request):
     context = {}
-    if(request.method == "POST"):
+    if request.method == "POST":
         email = request.POST.get("email")
         user = User.objects.filter(email=email).first()
-        if(not user):
-            return render(request, 'signup.html', {"error": "Email not registered"})
-        random_numbers = [random.randint(0, 9) for _ in range(6)]
-        otp = ''.join(map(str, random_numbers))
-        user.email_confirmation_code= otp
-        user.otpt=timezone.now()
+        if not user:
+            return render(request, 'forgot_password.html', {"error": "Email not registered"})
+        
+        # Generate OTP and set expiry
+        otp = generate_token()
+        user.forgot_password_code = otp
+        user.forgot_password_expiry = datetime.now() + timedelta(hours=1)
         user.save()
-        html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name() })
+        domain = SiteSetting.objects.first().domain
+        url1  = domain+reverse("reset_password")+f'?code={otp}'
+        html_message = render_to_string('password_template.html', {'otp': otp, "name": user.get_name(), "url":url1, "domain":domain})
         plain_message = strip_tags(html_message)
-        mail.send_mail('Verify Email Address', plain_message, settings.SMTP_FROM, [email], html_message=html_message)
-        url = reverse("confirm_email", args=[email])
+        mail.send_mail('Password Reset', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message, fail_silently=True)
+        url = reverse("sent_email", args=[email])
         return redirect(url)
+    
     return render(request, "forgot_password.html", context)
 
+
+def sent_email(request,email):
+    context = {"email":email}
+    return render(request, 'sent_email.html', context)
+
+# Reset password view
+def reset_password(request):
+    code = request.GET.get("code")
+    user = User.objects.filter(forgot_password_code=code).first()
+    
+    if ((not code) or not user or user.forgot_password_expiry < timezone.now()):
+        return render(request, 'forgot_password.html', {"error": "Invalid or expired code"})
+    
+    if request.method == "POST":
+        password = request.POST.get("password")
+        user.set_password(password)
+        user.forgot_password_code = None
+        user.forgot_password_expiry = None 
+        user.save()
+        return redirect("login")
+    return render(request, "reset_password.html", {"code": code})
 
 def confirm_email(request,email):
     context = {"email":email}
@@ -256,8 +291,6 @@ def change_password(request):
         old_password = request.POST.get("oldpassword")
         new_password = request.POST.get("newpassword")
         new_password_confirm = request.POST.get("passwordconfirm")
-        print(new_password)
-        print(new_password_confirm)
 
         if not user.check_password(old_password):
             context["error"] ='The old password you entered is incorrect.'
@@ -382,7 +415,8 @@ def create_trans(request):
         domain = SiteSetting.objects.first().domain
         trans.email_status="sent"
         details = TransactionDetail.objects.filter(active=True).first()
-        html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": trans.transaction_medium, "amount": user.btc})
+        url  = domain+reverse("transactions")
+        html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": trans.transaction_medium, "amount": user.btc,"url":url})
         plain_message = strip_tags(html_message)
         mail.send_mail('Deposit Notification', plain_message, settings.EMAIL_HOST_USER, [user.email], html_message=html_message, fail_silently=True)
         trans.save()

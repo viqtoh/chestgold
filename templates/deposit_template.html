@@ -12,7 +12,7 @@
                   <p>Hello {{ name }},</p>
 
                   {% if type == "btc" %}
-                      <p>Your deposit of {{ amount }} BTC will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2 }} BTC will reflect in your wallet once it has been confirmed.</p>
                   {% elif type == "bank transfer" %}
                       <p>Your deposit of {{ amount }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following bank account:</p>
@@ -22,20 +22,20 @@
                           <strong>Account Name:</strong> {{ detail.bank_account_name }}
                       </p>
                   {% elif type == "zelle" %}
-                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following Zelle account:</p>
                       <p>
                           <strong>Email:</strong> {{ detail.zelle_email }}
                       </p>
                   {% elif type == "cash app" %}
-                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following Cash App account:</p>
                       <p>
                           <strong>Username:</strong> {{ detail.cashapp_username }}<br>
                           <strong>Account Name:</strong> {{ detail.cashapp_account_name }}
                       </p>
                   {% elif type == "paypal" %}
-                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following PayPal account:</p>
                       <p>
                           <strong>Email:</strong> {{ detail.paypal_email }}
@@ -43,7 +43,7 @@
                   {% endif %}
 
 
-                <a href="{% url 'transactions' %}" target="_blank" data-saferedirecturl="{% url 'transactions' %}">View Transaction Details</a>
+                <a href="{{ url  }}" target="_blank" data-saferedirecturl="{{ url }}">View Transaction Details</a>
                
                 <h3>How do I know this email is from Chestgold?</h3>
                 <p>The link provided in this email starts with <a href="{{ domain }}" target="_blank" >https://</a> and contain <a href="{{ domain }}" target="_blank">{{ domain }}</a> so you know it is from us.</p>

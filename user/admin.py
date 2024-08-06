@@ -37,7 +37,7 @@ class UserAdmin(BaseUserAdmin):
                     "profile_pic",
                     "phone",
                     "address",
-                    "email_confirmation_code","otpt"
+                    "email_confirmation_code","otpt","forgot_password_code","forgot_password_expiry"
                 )
             },
         ),

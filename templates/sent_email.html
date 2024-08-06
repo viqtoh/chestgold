@@ -22,56 +22,16 @@
           <div class="col-12">
             <div class="vh-auth">
               <div class="row g-4">
-                <div class="col-lg-5" style="margin: auto;">
+                <div class="col-lg-8" style="margin: auto;">
                   <center>
                     <a href="" style="text-decoration-line: none">
                       <h3 class="vh-query__title t-text-white text-capitalize mb-3">
                     Reset password using your email
                       </h3>
                     </a>
+                    <p style="color: white;">A mail containing a link to reset your password has been sent to {{ email }}</p>
                 </center>
-                  <form method="POST" class="row g-4">
-                    {% csrf_token %}
-                    <div class="col-12">
-                      {% if error %}
-                      <p style="color: red">{{ error }}</p>
-                      {% endif %}
-                    </div>
-                    <div class="col-12">
-                      <input type="email" class="
-                          form-control
-                          form-control-custom
-                          form-control-custom--outline
-                          form-control-custom--outline-thin
-                          t-text-white
-                        " placeholder="email" name="email" required="">
-                    </div>
-                    <div class="col-12">
-                      <button class="
-                          btn btn--lg
-                          button-solid
-                          btn-grad btn-grad--orange
-                          text-uppercase
-                          btn--sqr
-                          w-100
-                        " type="submit" name="reset">
-                        Submit
-                      </button>
-                    </div>
-                    <div class="col-12">
-                      <p class="mb-0 t-text-white text-capitalize">
-                        New on our platform?
-                        <a href="{% url 'signup' %}" class="
-                            t-link t-link--primary
-                            t-primary-clr
-                            text-capitalize
-                            d-inline-block
-                          ">
-                          Create account
-                        </a>
-                      </p>
-                    </div>
-                  </form>
+                  
                 </div>
               </div>
             </div>
