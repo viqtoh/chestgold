@@ -130,16 +130,16 @@ DEFAULT_FROM_EMAIL = 'noreply@chestgold.net'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-STATIC_ROOT = "/staticfiles"
+STATIC_ROOT = "staticfiles/"
 # Added manually
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
