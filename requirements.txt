@@ -19,7 +19,7 @@ packaging
 pathspec
 pillow
 platformdirs
-psycopg2
+psycopg2-binary
 pydantic
 pydantic_core
 python-decouple
