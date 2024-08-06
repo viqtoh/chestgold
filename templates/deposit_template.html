@@ -8,62 +8,43 @@
             <tbody><tr>
               <td>
                 <h1>Deposit Notification</h1>
-                <h2>Please confirm your email address</h2>
-                <p>Hello {{ name }},</p>
-                {% if type == "btc" %}
-                <p>Your deposit of {{ amount }} BTC will reflect in your wallet once it has been confirmed.</p>
-                {% elif type == "bank transfer" %}
-                <p>Your deposit of of {{ amount }} USD will reflect in your wallet once it has been confirmed.</p>
-                <p>Complete your deposit by transferring the amount to the following bank account:</p>
-                <ul>
-                    <li>
-                        <strong>{{ detail.bank_name }}</strong><br>
-                        Account Number: {{ detail.bank_account_number }}<br>
-                        Bank Account Name: {{ detail.bank_account_name }}
-                    </li>
-                </ul>
-                {% elif type == "zelle" %}
-                <p>Your deposit of of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
-                <p>Complete your deposit by transferring the amount to the following zelle account:</p>
-                <ul>
-                    <li>
-                        Email: {{ detail.zelle_email }}<br>
-                    </li>
-                  </ul>
-                {% elif type == "cash app" %}
-                <p>Your deposit of of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
-                <p>Complete your deposit by transferring the amount to the following cashapp account:</p>
-                <ul>
-                    <li>
-                        Username: {{ detail.cashapp_username }}<br>
-                        Account Name: {{ detail.cashapp_account_name }}<br>
-                    </li>
-                  </ul>
+                  <h2>Please confirm your email address</h2>
+                  <p>Hello {{ name }},</p>
+
+                  {% if type == "btc" %}
+                      <p>Your deposit of {{ amount }} BTC will reflect in your wallet once it has been confirmed.</p>
+                  {% elif type == "bank transfer" %}
+                      <p>Your deposit of {{ amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Complete your deposit by transferring the amount to the following bank account:</p>
+                      <p>
+                          <strong>Bank Name:</strong> {{ detail.bank_name }}<br>
+                          <strong>Account Number:</strong> {{ detail.bank_account_number }}<br>
+                          <strong>Account Name:</strong> {{ detail.bank_account_name }}
+                      </p>
+                  {% elif type == "zelle" %}
+                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Complete your deposit by transferring the amount to the following Zelle account:</p>
+                      <p>
+                          <strong>Email:</strong> {{ detail.zelle_email }}
+                      </p>
+                  {% elif type == "cash app" %}
+                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Complete your deposit by transferring the amount to the following Cash App account:</p>
+                      <p>
+                          <strong>Username:</strong> {{ detail.cashapp_username }}<br>
+                          <strong>Account Name:</strong> {{ detail.cashapp_account_name }}
+                      </p>
                   {% elif type == "paypal" %}
-                  <p>Your deposit of of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
-                  <p>Complete your deposit by transferring the amount to the following PayPal account:</p>
-                  <ul>
-                      <li>
-                          Email: {{ detail.paypal_email }}<br>
-                      </li>
-                    </ul>
-                {% endif %}
-                <h3 style="background-color:cornsilk;padding:4px;text-align:center;width:100%">{{ otp }}</h3>
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="m_-1745847320119700808btn m_-1745847320119700808btn-primary">
-                  <tbody>
-                    <tr>
-                      <td align="left">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                          <tbody>
-                            <tr>
-                              <td> <a href="{{ url }}" target="_blank" data-saferedirecturl="{{ url }}">Proceed</a> </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table> <br>
+                      <p>Your deposit of {{ detail.amount }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Complete your deposit by transferring the amount to the following PayPal account:</p>
+                      <p>
+                          <strong>Email:</strong> {{ detail.paypal_email }}
+                      </p>
+                  {% endif %}
+
+
+                <a href="{% url 'transactions' %}" target="_blank" data-saferedirecturl="{% url 'transactions' %}">View Transaction Details</a>
+               
                 <h3>How do I know this email is from Chestgold?</h3>
                 <p>The link provided in this email starts with <a href="{{ domain }}" target="_blank" >https://</a> and contain <a href="{{ domain }}" target="_blank">{{ domain }}</a> so you know it is from us.</p>
                 <p>Thanks, <br>

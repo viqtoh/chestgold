@@ -223,11 +223,11 @@ class Transaction(models.Model):
         return f"{self.transaction_type.capitalize()} by {user.get_name()} - Amount: {self.amount}"
     
     def save(self, *args, **kwargs):
-        domain = SiteSetting.objects.filter(active=True).first().domain
+        domain = SiteSetting.objects.first().domain
         if self.pk is not None:
             user = User.objects.filter(transactions__in=[self]).first()
             original = Transaction.objects.get(pk=self.pk)
-            if original.email_status == "not sent" and self.status == "sent" and self.transaction_type == "deposit" and self.transaction_medium != 'btc':
+            if original.email_status == "not sent" and self.email_status == "sent" and self.transaction_type == "deposit" and self.transaction_medium != 'btc':
                 details = TransactionDetail.objects.filter(active=True).first()
                 html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": self.transaction_medium, "amount": self.amount})
                 plain_message = strip_tags(html_message)

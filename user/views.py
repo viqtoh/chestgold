@@ -374,8 +374,18 @@ def pay_btc(request):
 @login_required
 def create_trans(request):
     user = request.user
+    if(user.usd ==0 or user.dep_type ==""):
+        return redirect("deposit")
     trans = Transaction(amount= user.usd, transaction_type="deposit", status="pending", transaction_medium=user.dep_type)
     trans.save()
+    if(trans.transaction_medium == "btc"):
+        domain = SiteSetting.objects.first().domain
+        trans.email_status="sent"
+        details = TransactionDetail.objects.filter(active=True).first()
+        html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": trans.transaction_medium, "amount": user.btc})
+        plain_message = strip_tags(html_message)
+        mail.send_mail('Deposit Notification', plain_message, settings.EMAIL_HOST_USER, [user.email], html_message=html_message, fail_silently=True)
+        trans.save()
     user.transactions.add(trans)
     user.usd =0
     user.btc =0
