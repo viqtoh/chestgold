@@ -7,7 +7,7 @@ if project_home not in sys.path:
     sys.path.append(project_home)
 
 # Set environment variables
-os.environ['DJANGO_SETTINGS_MODULE'] = 'myapp.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'chestgold.settings'
 
 # Activate the virtual environment
 activate_this = '/home2/chestgol/virtualenv/chestgold/3.9/bin/activate_this.py'
