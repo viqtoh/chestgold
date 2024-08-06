@@ -119,12 +119,12 @@ LOGIN_URL = 'login'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST = 'mail.chestgold.net'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'postmaster@sandbox01b89ed31a7149c2a4ddd6e9ff55831e.mailgun.org'
-EMAIL_HOST_PASSWORD = '529dce5d285e685aa2b7b22312e09260-5d2b1caa-20db080a'
-DEFAULT_FROM_EMAIL = 'postmaster@sandbox01b89ed31a7149c2a4ddd6e9ff55831e.mailgun.org'
+EMAIL_HOST_USER = 'noreply@chestgold.net'
+EMAIL_HOST_PASSWORD = 'o^tK==NUH_I0'
+DEFAULT_FROM_EMAIL = 'noreply@chestgold.net'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
