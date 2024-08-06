@@ -7,6 +7,8 @@ from django.conf import settings
 import random, string
 from datetime import datetime, date, time, timedelta
 from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class User(AbstractUser):
     username = None
@@ -151,12 +153,17 @@ class Plan(models.Model):
         return (self.amount * ((self.interest / 100) * (days/total_days)))
     
     def get_profit_7(self):
-        if(timezone.now().date() > self.release_date):
+        if timezone.now().date() > self.release_date:
             return 0
+
         _7days_ago = timezone.now().date() - timedelta(days=7)
-        days_no = (timezone.now().date() - self.date if self.date >_7days_ago else _7days_ago).days
+        days_no = (timezone.now().date() - self.date).days if self.date > _7days_ago else (timezone.now().date() - _7days_ago).days
         total_days = (self.release_date - self.date).days
-        return (self.amount * ((self.interest / 100) * (days_no/total_days)))
+
+        if total_days == 0:
+            return 0  # To prevent division by zero
+
+        return self.amount * ((self.interest / 100) * (days_no / total_days))
     
     def get_free(self):
         if(timezone.now().date() < self.release_date):
@@ -216,16 +223,15 @@ class Transaction(models.Model):
         return f"{self.transaction_type.capitalize()} by {user.get_name()} - Amount: {self.amount}"
     
     def save(self, *args, **kwargs):
+        domain = SiteSetting.objects.filter(active=True).first().domain
         if self.pk is not None:
+            user = User.objects.filter(transactions__in=[self]).first()
             original = Transaction.objects.get(pk=self.pk)
             if original.email_status == "not sent" and self.status == "sent" and self.transaction_type == "deposit" and self.transaction_medium != 'btc':
-                mail.send_mail(
-                    'Completed Deposit',
-                    f'Dear {self.user.first_name}, your deposit of ${self.amount} has been successfully completed.',
-                    'from@example.com',
-                    [self.user.email],
-                    fail_silently=False,
-                )
+                details = TransactionDetail.objects.filter(active=True).first()
+                html_message = render_to_string('deposit_template.html', {'details':details, "name": user.get_name(), "domain": domain, "type": self.transaction_medium, "amount": self.amount})
+                plain_message = strip_tags(html_message)
+                mail.send_mail('Deposit Notification', plain_message, settings.EMAIL_HOST_USER, [user.email], html_message=html_message)
 
         super(Transaction, self).save(*args, **kwargs)
 
@@ -233,12 +239,13 @@ class Transaction(models.Model):
 class TransactionDetail(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     qr_code = models.ImageField(upload_to="QR/", blank=True, null=True)
-    bank_name = models.CharField(max_length=255, blank=True, null=True)
-    bank_number= models.CharField(max_length=255, blank=True, null=True)
-    bank_sort_code=models.CharField(max_length=255, blank=True, null=True)
-    zelle_info =models.CharField(max_length=255, blank=True, null=True)
-    paypal_info =models.CharField(max_length=255, blank=True, null=True)
-    cash_app_info =models.CharField(max_length=255, blank=True, null=True)
+    bank_name = models.CharField(max_length=255, null=True, blank=True)
+    bank_account_number = models.CharField(max_length=255, null=True, blank=True)
+    bank_account_name = models.CharField(max_length=255, null=True, blank=True)
+    zelle_email =models.CharField(max_length=255, null=True, blank=True)
+    cashapp_username=models.CharField(max_length=255, null=True, blank=True)
+    cashapp_account_name = models.CharField(max_length=255, null=True, blank=True)
+    paypal_email= models.CharField(max_length=255, null=True, blank=True)
     active = models.BooleanField(default=True)
 
     def get_qr(self):
@@ -255,7 +262,9 @@ class TransactionDetail(models.Model):
 
 
 class SiteSetting(models.Model):
-    support_email = models.EmailField(default="support@domain.com")
+    support_email = models.EmailField(default="support@chestgold.net")
     support_phone = models.CharField(default="+1234567890", max_length=255)
     concierge_phone = models.CharField(default="+1234567890", max_length=255)
     expert_phone = models.CharField(default="+1234567890", max_length=255)
+    domain = models.CharField(default="chestgold.net", max_length=255)
+

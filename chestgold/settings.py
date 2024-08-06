@@ -27,7 +27,7 @@ SECRET_KEY = "r0sn0bq0u#94lj94whrdn-1f&vlc=e1a(y*f4t8*r5+05i9@1m"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['chestgold.net', 'www.chestgold.net']
+ALLOWED_HOSTS = ['chestgold.net', 'www.chestgold.net','localhost']
 
 
 # Application definition

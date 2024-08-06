@@ -85,7 +85,7 @@ def signup(request):
         url = reverse("confirm_email", args=[email])
         html_message = render_to_string('confirm_template.html', {'otp':otp, "name": nwuser.get_name(), "domain": request.get_host(),"url":url })
         plain_message = strip_tags(html_message)
-        mail.send_mail('Verify Email Address', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
+        mail.send_mail('Your Confirmation Code', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
         return redirect(url)
     return render(request, 'signup.html', context)
 
@@ -103,7 +103,7 @@ def resend_confirmation(request,email):
     url = reverse("confirm_email", args=[email])
     html_message = render_to_string('confirm_template.html', {'otp':otp, "name": user.get_name(), "domain": request.get_host(),"url":url })
     plain_message = strip_tags(html_message)
-    mail.send_mail('Verify Email Address', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
+    mail.send_mail('Your Confirmation Code', plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
     return redirect(url)
 
 
