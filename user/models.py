@@ -148,6 +148,14 @@ class Plan(models.Model):
     interest = models.FloatField(default=0)
     investment_plan = models.ForeignKey("InvestmentPlan", on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        user = User.objects.filter(plans__in=[self]).first()
+        if(user):
+            name = user.get_name()
+        else:
+            name ="null user"
+        return (f'Plan for {name}; released {self.release_date}')
+
 
     def get_profit(self):
         current_date = timezone.now().date() if timezone.now().date() < self.release_date else self.release_date
@@ -226,8 +234,8 @@ class Transaction(models.Model):
         else:
             name = "No User"
         if self.transaction_type == "deposit":
-            return f"{self.transaction_type.capitalize()} via {self.transaction_medium} by {name} - Amount: {self.amount}"
-        return f"{self.transaction_type.capitalize()} by {name} - Amount: {self.amount}"
+            return f"{self.status} {self.transaction_type.capitalize()} via {self.transaction_medium} by {name} - Amount: {self.amount}"
+        return f"{self.status} {self.transaction_type.capitalize()} by {name} - Amount: {self.amount}"
     
     def save(self, *args, **kwargs):
         domain = SiteSetting.objects.first().domain
@@ -267,6 +275,10 @@ class TransactionDetail(models.Model):
             with transaction.atomic():
                 TransactionDetail.objects.exclude(id=self.id).update(active=False)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        active = "Active" if self.active else "Inactive"
+        return (f'{active} Transaction Details - #{self.id}')
 
 
 class SiteSetting(models.Model):
