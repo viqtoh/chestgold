@@ -1,3 +1,4 @@
+{% load humanize %}
 <div class="m_-1745847320119700808content">
   <table role="presentation" class="m_-1745847320119700808main">
   
@@ -12,7 +13,7 @@
                   <p>Hello {{ name }},</p>
 
                   {% if type == "btc" %}
-                      <p>Your deposit of {{ amount|floatformat:2 }} BTC will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2|intcomma }} BTC will reflect in your wallet once it has been confirmed.</p>
                   {% elif type == "bank transfer" %}
                       <p>Your deposit of {{ amount }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following bank account:</p>
@@ -22,20 +23,20 @@
                           <strong>Account Name:</strong> {{ detail.bank_account_name }}
                       </p>
                   {% elif type == "zelle" %}
-                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2|intcomma }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following Zelle account:</p>
                       <p>
                           <strong>Email:</strong> {{ detail.zelle_email }}
                       </p>
                   {% elif type == "cash app" %}
-                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2|intcomma }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following Cash App account:</p>
                       <p>
                           <strong>Username:</strong> {{ detail.cashapp_username }}<br>
                           <strong>Account Name:</strong> {{ detail.cashapp_account_name }}
                       </p>
                   {% elif type == "paypal" %}
-                      <p>Your deposit of {{ amount|floatformat:2 }} USD will reflect in your wallet once it has been confirmed.</p>
+                      <p>Your deposit of {{ amount|floatformat:2|intcomma }} USD will reflect in your wallet once it has been confirmed.</p>
                       <p>Complete your deposit by transferring the amount to the following PayPal account:</p>
                       <p>
                           <strong>Email:</strong> {{ detail.paypal_email }}

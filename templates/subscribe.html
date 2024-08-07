@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}Transactions{% endblock title %}
+
 
 {% block content %}
 <div class="col-md-9 col-xxl-9">
@@ -53,7 +55,7 @@
                           
                                       <div class="row text-capitalize t-text-white">
                                         <div class="col-6">
-                                          <p>{{ investment.interest|floatformat:2 }}%</p>
+                                          <p>{{ investment.interest|floatformat:2|intcomma }}%</p>
                                         </div>
                                         <div class="col-6">
                                            <p>{{ investment.duration }}</p>
@@ -71,8 +73,8 @@
                           
                                       <div class="row text-capitalize t-text-white">
                                         <div class="col-12" style="line-height: 1.5px; text-align: left;">
-                                          <p>Min Deposit - <b>{{ investment.min_deposit|floatformat:2 }} USD</b></p>
-                                           <p>Max Deposit - {{ investment.max_deposit|floatformat:2 }} USD</p>
+                                          <p>Min Deposit - <b>{{ investment.min_deposit|floatformat:2|intcomma }} USD</b></p>
+                                           <p>Max Deposit - {{ investment.max_deposit|floatformat:2|intcomma }} USD</p>
                                            <p>Term Duration - {{ investment.duration }} {% if investment.duration_type == "weeks" %}{% if investment.duration > 1 %}weeks{% else %}week{% endif %}{% else %}{% if investment.duration > 1 %}months{% else %}month{% endif %}{% endif %}</p>
                                            <p>Payout Term - After maturity</p>
                                            <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">

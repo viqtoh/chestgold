@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}Investments{% endblock title %}
 
@@ -53,7 +54,7 @@
               </p>
               </div>
             <h6 class="t-text-white fw-bold text-uppercase">
-              {{ user.get_free_investments |floatformat:2 }} usd
+              {{ user.get_free_investments |floatformat:2|intcomma }} usd
             </h6>
 
             <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
@@ -63,7 +64,7 @@
             </div>
           
             <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
-              {{ user.get_unfree_investments |floatformat:2 }}
+              {{ user.get_unfree_investments |floatformat:2|intcomma }}
             </h3>
             <p class="fw-bold text-capitalize t-text-white col-lg-10">Locked</p>
             <div class="col-sm-12 col-lg-10">
@@ -135,7 +136,7 @@
               </p>
               </div>
             <h6 class="t-text-white fw-bold text-uppercase">
-              {{ user.get_unfree_investments_principal |floatformat:2 }} usd
+              {{ user.get_unfree_investments_principal |floatformat:2|intcomma }} usd
             </h6>
 
             <div class="row fw-bold text-capitalize t-text-white xl-text col-lg-10">
@@ -145,7 +146,7 @@
             </div>
           
             <h3 class="t-text-white fw-bold text-uppercase vh-user-card__title" style="font-size: 16px"> <b>+</b> <br><br>
-              {{ user.get_unfree_investments_profit |floatformat:2 }} usd
+              {{ user.get_unfree_investments_profit |floatformat:2|intcomma }} usd
             </h3>
 
             <p class="fw-bold text-capitalize t-text-white col-lg-10">Approx profit</p>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -199,7 +200,7 @@ function getCookie(name) {
 
             <div class="row text-capitalize t-text-white">
               <div class="col-6">
-                <p>{{ plan.interest|floatformat:2 }}%</p>
+                <p>{{ plan.interest|floatformat:2|intcomma }}%</p>
               </div>
               <div class="col-6">
                  <p>{{ plan.duration }}</p>
@@ -217,8 +218,8 @@ function getCookie(name) {
 
             <div class="row text-capitalize t-text-white">
               <div class="col-12" style="line-height: 1.5px; text-align: left;">
-                <p>Min Deposit - <b>{{ plan.min_deposit|floatformat:2 }} USD</b></p>
-                 <p>Max Deposit - {{ plan.max_deposit|floatformat:2 }} USD</p>
+                <p>Min Deposit - <b>{{ plan.min_deposit|floatformat:2|intcomma }} USD</b></p>
+                 <p>Max Deposit - {{ plan.max_deposit|floatformat:2|intcomma }} USD</p>
                  <p>Term Duration - {{ plan.duration }} {% if plan.duration_type == "weeks" %}{% if plan.duration > 1 %}weeks{% else %}week{% endif %}{% else %}{% if plan.duration > 1 %}months{% else %}month{% endif %}{% endif %}</p>
                  <p>Payout Term - After maturity</p>
                  <p>Capital Return<svg style="color: #000;" class="col-lg-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="The invested amount will be returned at the end of term">

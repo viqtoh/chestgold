@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}Transactions{% endblock title %}
 
@@ -98,7 +99,7 @@
                 {% endif %}
                {% for t in transactions %}
                 <tr>
-                  <td class="t-text-white text-center">${{ t.amount }}</td><td class="t-text-white text-capitalize text-center">{{ t.status }}</td>
+                  <td class="t-text-white text-center">${{ t.amount|floatformat:2|intcomma }}</td><td class="t-text-white text-capitalize text-center">{{ t.status }}</td>
                   <td class="t-text-white text-capitalize text-center">{{ t.transaction_type }}</td>
                   <td class="t-text-white text-center">{{ t.time }}</td>
                 </tr>

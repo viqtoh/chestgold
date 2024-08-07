@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -144,14 +145,14 @@ function getCookie(name) {
 
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-parent="#accordionFlushExample">
                       <div class="accordion-body">
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px; color: #fd7e14">{{ balance|floatformat:2 }} USD</h6>
-                        <h6 class="t-text-white text-capitalize" style="font-size: 12px">{{ balance|floatformat:2 }} USDT</h6>
+                        <h6 class="t-text-white text-capitalize" style="font-size: 12px; color: #fd7e14">{{ balance|floatformat:2|intcomma }} USD</h6>
+                        <h6 class="t-text-white text-capitalize" style="font-size: 12px">{{ balance|floatformat:2|intcomma }} USDT</h6>
                         <div class="row t-text-white">
                           <div class="col-sm-6">
                             <p>profits (7d)</p>
                           </div>
                           <div class="col-sm-6">
-                            <p>{{ user.get_profit_7 |floatformat:2 }} USD</p>
+                            <p>{{ user.get_profit_7 |floatformat:2|intcomma }} USD</p>
                           </div>
                           
                           <div class="col-sm-6">
