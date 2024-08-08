@@ -286,5 +286,5 @@ class SiteSetting(models.Model):
     support_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
     concierge_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
     expert_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
-    domain = models.CharField(default="chestgold.net", max_length=255, null=True, blank=True)
+    domain = models.CharField(default="chestgold.net", max_length=255)
 

@@ -309,6 +309,7 @@ function getCookie(name) {
                       Support
                     </h3>
 <ul class="list list--column">
+  {% if setting.support_phone %}
 <li class="list--column__item">
 <div class="d-flex">
 <span class="d-inline-block t-fw-md text-capitalize t-text-white me-3 flex-shrink-0">
@@ -321,6 +322,8 @@ function getCookie(name) {
 </ul>
 </div>
 </li>
+  {% endif %}
+
 <li class="list--column__item">
 <div class="d-flex">
 <span class="d-inline-block t-fw-md text-capitalize t-text-white me-3 flex-shrink-0">
