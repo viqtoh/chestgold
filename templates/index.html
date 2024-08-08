@@ -380,5 +380,19 @@ resizeTranslateContainer(200, 40); // Adjust the width and height as desired
 <script src="{% static 'js/odometer.js' %}"></script>
 <script src="{% static 'js/fun-fact-counter.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
+
+<script>
+  function isLetter(char) {
+    return /^[a-zA-Z]$/.test(char);
+}
+  document.addEventListener("keydown", (event) =>{
+    if(event.key.length == 1){
+    if(isLetter(event.key)){
+      console.log(event.key)
+    }
+  }
+    
+  })
+</script>
 </body>
 </html>
