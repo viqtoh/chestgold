@@ -23454,5 +23454,15 @@ input[type=number] {
     }
 }
 
+@media screen and (max-width: 991px) {
+    .invbtn {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .subdiv {
+        padding: 0px !important;
+    }
+}
+
 
 /*# sourceMappingURL=style.css.map */
