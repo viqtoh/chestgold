@@ -282,9 +282,9 @@ class TransactionDetail(models.Model):
 
 
 class SiteSetting(models.Model):
-    support_email = models.EmailField(default="support@chestgold.net")
-    support_phone = models.CharField(default="+1234567890", max_length=255)
-    concierge_phone = models.CharField(default="+1234567890", max_length=255)
-    expert_phone = models.CharField(default="+1234567890", max_length=255)
-    domain = models.CharField(default="chestgold.net", max_length=255)
+    support_email = models.EmailField(default="support@chestgold.net", null=True, blank=True)
+    support_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
+    concierge_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
+    expert_phone = models.CharField(default="+1234567890", max_length=255, null=True, blank=True)
+    domain = models.CharField(default="chestgold.net", max_length=255, null=True, blank=True)
 
